@@ -22,11 +22,7 @@ export default function DefaultLayout() {
         <>
             <nav className="border-b py-3 sticky top-0 bg-white z-50">
                 <div className="container mx-auto flex justify-between">
-                    <h1 className="w-32">
-                        <Link to="/" className=" ">
-                            <img src="../assets/logo.png" alt="logo" className="w-32" />
-                        </Link>
-                    </h1>
+
                     <div className="flex  items-center">
                         <Link to={'/'}>
                             <FontAwesomeIcon icon={regular('compass')} className="h-7 w-7 mx-5 flex text-center" />
