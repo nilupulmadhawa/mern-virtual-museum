@@ -10,10 +10,6 @@ import Home from "./views/Home";
 import BlogsView from "./components/blogs/BlogsView";
 import BlogView from "./components/blogs/BlogView";
 import ArticlesView from "./components/blogs/ArticlesView";
-import BlogCategory from "./components/blogs/BlogCategory";
-
-
-
 
 
 const router = createBrowserRouter([
@@ -36,10 +32,6 @@ const router = createBrowserRouter([
             {
                 path: '/articlesview',
                 element: <ArticlesView />
-            },
-            {
-                path: '/blog',
-                element: <BlogCategory />
             },
             
             
