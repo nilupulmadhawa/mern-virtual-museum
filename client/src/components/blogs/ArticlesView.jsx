@@ -8,10 +8,14 @@ import {
    
   export default function ArticlesView() {
     return (
+        
+     <div className="mr-20 mt-5 mb-5 ml-20  text-center font-bold ext-2xl font-bold lg:text-4xl">
+     <h1>You Can Read Articles</h1>
       <Card
         shadow={false}
         className="relative grid h-[40rem] w-full max-w-[28rem] items-end justify-center overflow-hidden text-center mr-20 mt-5 mb-5 ml-20 bg-slate-200 rounded-md "
       >
+      
         <CardHeader
           floated={false}
           shadow={false}
@@ -36,5 +40,6 @@ On Saturday 22nd April 2023, “The Wild Escape” will be unveiled to celebrate
          
         </CardBody>
       </Card>
+      </div>
     );
   }
