@@ -45,7 +45,7 @@ const products = [
   const posts = [
     {
       id: 1,
-      title: 'FROM AFAR. TRAVELLING MATERIALS AND OBJECTS',
+      title: 'James Mulraine Early Modern British Art',
       href: '#',
       description:
         'Through materials and objects, this exhibition describes exchanges between distant worlds – exchanges often far more ancient than the explorations of the 16th century. From deepest antiquity, carnelian, lapis lazuli, ebony and ivory circulated along trade routes...',
@@ -145,7 +145,7 @@ export default function BlogsView() {
                 <button
                 onClick={() => setOpen(true)}
                 type="submit"
-                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-gray-900 focus:ring-offset-2"
               >
                 Read More
               </button>
@@ -172,78 +172,7 @@ export default function BlogsView() {
       <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
       
-      <Transition.Root show={open} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={setOpen}>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-in-out duration-500"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in-out duration-500"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-          </Transition.Child>
-
-          <div className="fixed inset-0 overflow-hidden">
-            <div className="absolute inset-0 overflow-hidden">
-              <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-                <Transition.Child
-                  as={Fragment}
-                  enter="transform transition ease-in-out duration-500 sm:duration-700"
-                  enterFrom="translate-x-full"
-                  enterTo="translate-x-0"
-                  leave="transform transition ease-in-out duration-500 sm:duration-700"
-                  leaveFrom="translate-x-0"
-                  leaveTo="translate-x-full"
-                >
-                  <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                    <div className="flex h-medium flex-col overflow-y-scroll bg-white shadow-xl mt-20">
-                      <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
-                        <div className="flex items-start justify-between">
-                        
-                          <Dialog.Title className="text-lg font-medium text-gray-900">
-                          FROM AFAR. TRAVELLING MATERIALS AND OBJECTS
-                          </Dialog.Title>
-                          <div className="ml-3 flex h-7 items-center">
-                            <button
-                              type="button"
-                              className="-m-2 p-2 text-gray-400 hover:text-gray-500"
-                              onClick={() => setOpen(true)}
-                            >
-{products.map((product) => (
-           
-              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7 h-96">
-                <img
-                  src={product.imageSrc}
-                  alt={product.imageAlt}
-                  className="h-full w-full object-cover object-center group-hover:opacity-75 mb-10"
-                />
-              </div>
-             
-              ))}      
-                            
-                              <span className="sr-only">Close panel</span>
-                              <XMarkIcon
-                                className="h-6 w-6"
-                                aria-hidden="true"
-                              />
-                            </button>
-                          </div>
-                        </div>
-
-                       
-                      </div>
-                    </div>
-                  </Dialog.Panel>
-                </Transition.Child>
-              </div>
-            </div>
-          </div>
-        </Dialog>
-      </Transition.Root>
-
+     
       
 
         

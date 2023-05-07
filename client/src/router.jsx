@@ -9,6 +9,7 @@ import Signup from "./views/Signup";
 import Home from "./views/Home";
 import BlogsView from "./components/blogs/BlogsView";
 import BlogView from "./components/blogs/BlogView";
+import ArticlesView from "./components/blogs/ArticlesView";
 
 
 
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
             {
                 path: '/blogview',
                 element: <BlogView />
+            },
+            {
+                path: '/articlesview',
+                element: <ArticlesView />
             },
             
             
