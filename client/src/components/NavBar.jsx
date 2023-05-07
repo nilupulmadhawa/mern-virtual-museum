@@ -233,23 +233,23 @@ const Navbar = ({ logout }) => {
           <div className="bg-white rounded-md shadow-xs">
             <Link
               className={
-                location.pathname === '/create-event'
+                location.pathname === '/blogsview'
                   ? 'block px-4 py-2 text-sm text-gray-700 bg-gray-100 text-blue-900'
                   : 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900'
               }
-              to="/create-event"
+              to="/blogsview"
             >
-              Create Blogs
+              Blogs
             </Link>
             <Link
               className={
-                location.pathname === '/show-all-event'
+                location.pathname === '/articlesview'
                   ? 'block px-4 py-2 text-sm text-gray-700 bg-gray-100 text-gray-900'
                   : 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900'
               }
-              to="/show-all-event"
+              to="/articlesview"
             >
-              Show All Blogs
+              Articles
             </Link>
           </div>
         </div>

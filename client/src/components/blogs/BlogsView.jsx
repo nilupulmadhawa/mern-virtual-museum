@@ -1,16 +1,11 @@
-import { useState } from 'react';
-import { StarIcon } from '@heroicons/react/20/solid';
-// import { RadioGroup } from '@headlessui/react';
+import react from 'react';
 import { Link } from 'react-router-dom';
-import { Fragment } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
 
 const products = [
   {
     id: 1,
 
-    href: '#',
+    href: '/blogview',
 
     imageSrc:
       'https://images.pexels.com/photos/460736/pexels-photo-460736.jpeg?cs=srgb&dl=pexels-pixabay-460736.jpg&fm=jpg',
@@ -73,7 +68,6 @@ const posts = [
 ];
 
 export default function BlogsView() {
-  const [open, setOpen] = useState(true);
   return (
     <div className="bg-white justify-center">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -118,7 +112,7 @@ export default function BlogsView() {
 
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 ">
           {products.map((product) => (
-            <a key={product.id} href={product.href} className="group">
+            <Link key={product.id} to={product.href} className="group">
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7 h-96">
                 <img
                   src={product.imageSrc}
@@ -152,11 +146,9 @@ export default function BlogsView() {
                     <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
                       {post.description}
                     </p>
-                    <Link to="/blogview">
-                      <button className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-gray-900 focus:ring-offset-2">
-                        Read More
-                      </button>
-                    </Link>
+                    <button className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-gray-900 focus:ring-offset-2">
+                      Read More
+                    </button>
                   </div>
                   <div className="relative mt-8 flex items-center gap-x-4">
                     <img
@@ -176,7 +168,7 @@ export default function BlogsView() {
                   </div>
                 </article>
               ))}
-            </a>
+            </Link>
           ))}
         </div>
       </div>
