@@ -24,6 +24,8 @@ import ShopMainPage from './components/dashboard/shopmanage/ShopMainPage';
 import ArticlesView from './components/blogs/ArticlesView';
 import BlogsView from './components/blogs/BlogsView';
 import BlogView from './components/blogs/BlogView';
+import MuseumList from './components/MuseumList';
+import Museum from './components/Museum';
 
 const router = createBrowserRouter([
   {
@@ -58,7 +60,7 @@ const router = createBrowserRouter([
         path: '/singleitemview',
         element: <SingleItemView />,
       },
-     
+
       {
         path: '/eventDetails',
         element: <EventDetails />,
@@ -69,18 +71,28 @@ const router = createBrowserRouter([
       },
       {
         path: '/blogsview',
-        element: <BlogsView />
-    },
-    {
+        element: <BlogsView />,
+      },
+      {
         path: '/blogview',
-        element: <BlogView />
-    },
-    {
+        element: <BlogView />,
+      },
+      {
         path: '/articlesview',
-        element: <ArticlesView />
-    },
+        element: <ArticlesView />,
+      },
+
+      {
+        path: '/museumlist',
+        element: <MuseumList />,
+      },
     ],
   },
+  {
+    path: '/museum',
+    element: <Museum />,
+  },
+
   {
     path: '/',
     element: <GuestLayout />,
