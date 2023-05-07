@@ -1,50 +1,235 @@
-import React from 'react'
+import React from 'react';
+import Navbar from '../components/NavBar';
 
 export default function Home() {
-    return (
-        <div class="min-w-screen relative flex min-h-screen flex-col items-center justify-center bg-white pt-4"
-            x-data="{ open: true }">
-            <div class="">
-                <button class="rounded-lg bg-blue-50 px-5 py-2.5 text-sm font-medium text-blue-500 hover:bg-blue-100 hover:text-blue-600"> Show Modal </button>
+  return (
+    <>
+      <div class="flex justify-center items-center" style={{marginTop:'200px'}}>
+        <card class="grid grid-cols-6 max-w-5xl mx-8 rounded-xl bg-dark">
+          <div class="col-span-4">
+            <h2 class="font-bold text-3xl text-white ml-10 mt-8">
+              A cloud for your entire journey
+            </h2>
+
+            <p class="font-light text-white text-sm ml-10 mt-5">
+              Build robust applications using a comprehensive portfolio of
+              compute, storage, database, and networking products.
+            </p>
+
+            <button class="text-white font-semibold ml-10 mt-5 mb-8 group ">
+              View the docs
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="inline-block h-6 w-6 group-hover:translate-x-2 transition delay-100 transition-200"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div class="col-span-2 relative">
+            <img
+              src="https://www.digitalocean.com/_next/static/media/cloudJourneyImage.954519ea.svg"
+              class="absolute bottom-0 right-0"
+            />
+          </div>
+        </card>
+      </div>
+      <section class="pt-20 lg:pt-[120px] pb-10 lg:pb-20">
+        <div class="container">
+          <div class="flex flex-wrap justify-center -mx-4">
+            <div class="w-full px-4">
+              <div class="text-center mx-auto mb-[60px] lg:mb-20 max-w-[510px]">
+                <span class="font-semibold text-lg text-primary mb-2 block">
+                  Our Blogs
+                </span>
+                <h2
+                  class="
+                  font-bold
+                  text-3xl
+                  sm:text-4xl
+                  md:text-[40px]
+                  text-dark
+                  mb-4
+                  "
+                >
+                  Our Recent News
+                </h2>
+                <p class="text-base text-body-color">
+                  There are many variations of passages of Lorem Ipsum available
+                  but the majority have suffered alteration in some form.
+                </p>
+              </div>
             </div>
-            <div x-show="open"
-                class="fixed inset-0 bg-gray-600 bg-opacity-75 transition-opacity"></div>
-
-
-            <div class="fixed overflow-y-auto">
-                <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-
-                    <div x-show="open"
-                        class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+          </div>
+          <div class="flex flex-wrap -mx-4">
+            <div class="w-full md:w-1/2 lg:w-1/3 px-4">
+              <div class="max-w-[370px] mx-auto mb-10">
+                <div class="rounded overflow-hidden mb-8">
+                  <img
+                    src="https://cdn.tailgrids.com/1.0/assets/images/blogs/blog-01/image-01.jpg"
+                    alt="image"
+                    class="w-full"
+                  />
+                </div>
+                <div>
+                  <span
+                    class="
+                     bg-primary
+                     rounded
+                     inline-block
+                     text-center
+                     py-1
+                     px-4
+                     text-xs
+                     leading-loose
+                     font-semibold
+                     text-white
+                     mb-5
+                     "
+                  >
+                    Dec 22, 2023
+                  </span>
+                  <h3>
+                    <a
+                      href="javascript:void(0)"
+                      class="
+                        font-semibold
+                        text-xl
+                        sm:text-2xl
+                        lg:text-xl
+                        xl:text-2xl
+                        mb-4
+                        inline-block
+                        text-dark
+                        hover:text-primary
+                        "
                     >
-                        <div class="p-4 sm:p-10 text-center overflow-y-auto">
-                            <span class="mb-4 inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-4 border-yellow-50 bg-yellow-100 text-yellow-500">
-                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
-                                </svg>
-                            </span>
-
-                            <h3 class="mb-2 text-2xl font-bold text-gray-800">
-                                Sign out
-                            </h3>
-                            <p class="text-gray-500">
-                                Are you sure you would like to sign out of your account?
-                            </p>
-
-                            <div class="mt-6 flex justify-center gap-x-4">
-                                <a class="py-2.5 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm"
-                                    href="javascript:;">
-                                    Sign out
-                                </a>
-                                <button type="button" class="py-2.5 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm">
-                                    Cancel
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div >
-            </div >
-        </div >
-    )
+                      Meet AutoManage, the best AI management tools
+                    </a>
+                  </h3>
+                  <p class="text-base text-body-color">
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="w-full md:w-1/2 lg:w-1/3 px-4">
+              <div class="max-w-[370px] mx-auto mb-10">
+                <div class="rounded overflow-hidden mb-8">
+                  <img
+                    src="https://cdn.tailgrids.com/1.0/assets/images/blogs/blog-01/image-02.jpg"
+                    alt="image"
+                    class="w-full"
+                  />
+                </div>
+                <div>
+                  <span
+                    class="
+                     bg-primary
+                     rounded
+                     inline-block
+                     text-center
+                     py-1
+                     px-4
+                     text-xs
+                     leading-loose
+                     font-semibold
+                     text-white
+                     mb-5
+                     "
+                  >
+                    Mar 15, 2023
+                  </span>
+                  <h3>
+                    <a
+                      href="javascript:void(0)"
+                      class="
+                        font-semibold
+                        text-xl
+                        sm:text-2xl
+                        lg:text-xl
+                        xl:text-2xl
+                        mb-4
+                        inline-block
+                        text-dark
+                        hover:text-primary
+                        "
+                    >
+                      How to earn more money as a wellness coach
+                    </a>
+                  </h3>
+                  <p class="text-base text-body-color">
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="w-full md:w-1/2 lg:w-1/3 px-4">
+              <div class="max-w-[370px] mx-auto mb-10">
+                <div class="rounded overflow-hidden mb-8">
+                  <img
+                    src="https://cdn.tailgrids.com/1.0/assets/images/blogs/blog-01/image-03.jpg"
+                    alt="image"
+                    class="w-full"
+                  />
+                </div>
+                <div>
+                  <span
+                    class="
+                     bg-primary
+                     rounded
+                     inline-block
+                     text-center
+                     py-1
+                     px-4
+                     text-xs
+                     leading-loose
+                     font-semibold
+                     text-white
+                     mb-5
+                     "
+                  >
+                    Jan 05, 2023
+                  </span>
+                  <h3>
+                    <a
+                      href="javascript:void(0)"
+                      class="
+                        font-semibold
+                        text-xl
+                        sm:text-2xl
+                        lg:text-xl
+                        xl:text-2xl
+                        mb-4
+                        inline-block
+                        text-dark
+                        hover:text-primary
+                        "
+                    >
+                      The no-fuss guide to upselling and cross selling
+                    </a>
+                  </h3>
+                  <p class="text-base text-body-color">
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }

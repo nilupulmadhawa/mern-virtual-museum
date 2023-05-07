@@ -13,6 +13,8 @@ export default function GuestLayout() {
             <h1>GuestLayout</h1>
 
             <Outlet />
+
+            
         </div>
     );
 }
