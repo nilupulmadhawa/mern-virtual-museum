@@ -23,6 +23,7 @@ import BlogMainPage from './components/dashboard/blogmanage/BlogMainPage';
 import EventDetails from './views/EventDetails';
 import NewEvents from './views/NewEvents';
 import ManageEvent from './components/dashboard/eventmanage/ManageEvent';
+import ShopMainPage from './components/dashboard/shopmanage/ShopMainPage';
 
 const router = createBrowserRouter([
   {
@@ -120,6 +121,10 @@ const router = createBrowserRouter([
       {
         path: '/eventsmanage',
         element: <ManageEvent />,
+      },
+      {
+        path: '/shopmanage',
+        element: <ShopMainPage />,
       },
     ],
   },

@@ -25,7 +25,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
   {
     key: 'Shop',
     label: 'Shop',
-    path: '/shop',
+    path: '/shopmanage',
     icon: <HiOutlineShoppingCart />,
   },
   {
