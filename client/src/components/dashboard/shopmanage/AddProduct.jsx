@@ -3,7 +3,7 @@ import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
-export default function AddCategory() {
+export default function AddProduct() {
   const [open, setOpen] = useState(true);
 
   const cancelButtonRef = useRef(null);
@@ -59,10 +59,10 @@ export default function AddCategory() {
                                   </div>
                                   <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
                                     <h2 class="leading-relaxed">
-                                      Create Category for Virtual Museum Shop
+                                      Create Product for Virtual Museum Shop
                                     </h2>
                                     <p class="text-sm text-gray-500 font-normal leading-relaxed">
-                                      Add Souvenir Category for the Virtual
+                                      Add Souvenir Product for the Virtual
                                       Museum Shop
                                     </p>
                                   </div>
@@ -71,35 +71,46 @@ export default function AddCategory() {
                                   <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                                     <div class="flex flex-col">
                                       <label class="leading-loose">
-                                        Category Name
+                                        Product Name
                                       </label>
                                       <input
                                         type="text"
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                        placeholder="Add Category
+                                        placeholder="Add Product
+             Title"
+                                      />
+                                    </div>
+                                    <div class="flex flex-col">
+                                      <label class="leading-loose">
+                                        Product Category
+                                      </label>
+                                      <input
+                                        type="text"
+                                        class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                        placeholder="Add Product
              Title"
                                       />
                                     </div>
 
                                     <div class="flex flex-col">
                                       <label class="leading-loose">
-                                        Category Image
+                                        Product Image
                                       </label>
                                       <input
                                         type="file"
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                        placeholder="Add Category"
+                                        placeholder="Add Product"
                                       />
                                     </div>
                                     <div class="flex flex-col">
                                       <label class="leading-loose">
-                                        Category Description
+                                        Product Price
                                       </label>
-                                      <textarea
-                                        id="message"
-                                        rows="4"
+                                      <input
+                                        type="text"
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                      ></textarea>
+                                        placeholder="Add Product"
+                                      />
                                     </div>
                                   </div>
                                 </div>
