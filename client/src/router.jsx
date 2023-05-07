@@ -25,7 +25,11 @@ import MuseumList from './components/MuseumList';
 import Museum from './components/Museum';
 
 const router = createBrowserRouter([
-    {
+  {
+    path: '/',
+    element: <DefaultLayout />,
+    children: [
+      {
         path: '/',
         element: <Home />,
       },
@@ -53,11 +57,7 @@ const router = createBrowserRouter([
         path: '/singleitemview',
         element: <SingleItemView />,
       },
-      {
-        path: '/museumlist',
-        element: <MuseumList />,
-    },
-    
+
       {
         path: '/eventDetails',
         element: <EventDetails />,
@@ -65,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: '/newEvents',
         element: <NewEvents />,
+      },
+      {
+        path: '/museumlist',
+        element: <MuseumList />,
       },
     ],
   },
@@ -88,8 +92,8 @@ const router = createBrowserRouter([
   },
   {
     path: '/museum',
-    element: < Museum />,
-},
+    element: <Museum />,
+  },
   {
     path: '/',
     element: <DashboardLayout />,
@@ -120,7 +124,6 @@ const router = createBrowserRouter([
     path: '*',
     element: <NotFound />,
   },
-       
 ]);
 
 export default router;
