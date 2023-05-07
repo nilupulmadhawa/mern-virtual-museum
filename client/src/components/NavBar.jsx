@@ -40,7 +40,7 @@ const Navbar = ({ logout }) => {
           className={
             location.pathname === '/'
               ? 'bg-[#0A4D68] text-white px-4 py-2 rounded-md text-sm font-medium '
-              : 'text-gray-700 hover:bg-[#F1F6F9] hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium'
+              : 'text-white-700 hover:bg-[#F1F6F9] hover:text-white-900 px-3 py-2 rounded-md text-sm font-medium'
           }
         >
           Home
