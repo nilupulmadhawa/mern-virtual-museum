@@ -8,6 +8,7 @@ import {
    
   export default function BlogView() {
     return (
+        <div>
       <Card className="w-100 ml-20 mr-20 mt-5 mb-5 bg-slate-200 rounded-md">
       <Typography color="blue-gray" className=" text-2xl mt-5 font-mono font-bold text-center">
               James Mulraine Early Modern British Art
@@ -34,7 +35,8 @@ Yet despite their enormous potential value to society, the information embedded 
         </CardBody>
        
       </Card>
-
-      
+      <h3 className=" text-2xl mt-5 font-mono font-bold ml-20">Comment</h3>
+      <textarea class="resize border-slate-950 rounded-md text-2xl mt-5 mb-10  flex flex-col w-96 gap-6 ml-20">Add Comment</textarea>
+      </div>
     );
   }
