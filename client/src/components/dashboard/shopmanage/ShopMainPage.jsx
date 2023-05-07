@@ -1,6 +1,6 @@
 import React from 'react';
 import ShopCategoryTable from './ShopCategoryTable';
-// import ShopProductTable from './ShopProductTable';
+import ShopProductTable from './ShopProductTable';
 // import ShopOrderTable from './ShopOrderTable';
 
 export default function ShopMainPage() {
@@ -10,7 +10,7 @@ export default function ShopMainPage() {
       <br />
       <ShopCategoryTable />
       <br />
-      {/* <ShopProductTable /> */}
+      <ShopProductTable />
       <br />
       {/* <ShopOrderTable /> */}
     </div>

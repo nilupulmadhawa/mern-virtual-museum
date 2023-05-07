@@ -3,18 +3,30 @@ import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
-export default function AddCategory() {
+export default function EditProduct() {
   const [open, setOpen] = useState(true);
 
   const cancelButtonRef = useRef(null);
   return (
     <div>
-      <button
+      <div
+        class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
         onClick={() => setOpen(true)}
-        class="mb-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
-        Add
-      </button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+          />
+        </svg>
+      </div>
       <Transition.Root show={open} as={Fragment}>
         <Dialog
           as="div"
@@ -59,10 +71,10 @@ export default function AddCategory() {
                                   </div>
                                   <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
                                     <h2 class="leading-relaxed">
-                                      Create Category for Virtual Museum Shop
+                                      Update Souvenir Product
                                     </h2>
                                     <p class="text-sm text-gray-500 font-normal leading-relaxed">
-                                      Add Souvenir Category for the Virtual
+                                      Update Souvenir Product for the Virtual
                                       Museum Shop
                                     </p>
                                   </div>
@@ -71,35 +83,51 @@ export default function AddCategory() {
                                   <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                                     <div class="flex flex-col">
                                       <label class="leading-loose">
-                                        Category Name
+                                        Product Name
                                       </label>
                                       <input
                                         type="text"
+                                        value={
+                                          'Sri lankan traditional handmade wooden bookmark gift for book lovers'
+                                        }
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                        placeholder="Add Category
+                                        placeholder="Add Product
+             Title"
+                                      />
+                                    </div>
+                                    <div class="flex flex-col">
+                                      <label class="leading-loose">
+                                        Product Product
+                                      </label>
+                                      <input
+                                        type="text"
+                                        value={'Book Mark'}
+                                        class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                        placeholder="Add Product
              Title"
                                       />
                                     </div>
 
                                     <div class="flex flex-col">
                                       <label class="leading-loose">
-                                        Category Image
+                                        Product Image
                                       </label>
                                       <input
                                         type="file"
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                        placeholder="Add Category"
+                                        placeholder="Add Product"
                                       />
                                     </div>
                                     <div class="flex flex-col">
                                       <label class="leading-loose">
-                                        Category Description
+                                        Product Price
                                       </label>
-                                      <textarea
-                                        id="message"
-                                        rows="4"
+                                      <input
+                                        type="text"
+                                        value={'LKR 1400.00'}
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                      ></textarea>
+                                        placeholder="Add Product"
+                                      />
                                     </div>
                                   </div>
                                 </div>
@@ -116,7 +144,7 @@ export default function AddCategory() {
                       className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
                       onClick={() => setOpen(false)}
                     >
-                      Add
+                      Update
                     </button>
                     <button
                       type="button"
