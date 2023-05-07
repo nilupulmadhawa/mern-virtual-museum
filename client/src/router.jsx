@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import DefaultLayout from './layout/DefaultLayout';
 import GuestLayout from './layout/GuestLayout';
 
@@ -15,6 +15,7 @@ import ShopViewAccessories from './components/SouvinirShop/ShopViewAccessories';
 import AdminDashboard from './views/AdminDashboard';
 import DashboardLayout from './layout/DashboardLayout';
 import MuseumDetailsTable from './components/dashboard/museummanage/MuseumDetailsTable';
+import BlogMainPage from './components/dashboard/blogmanage/BlogMainPage';
 
 const router = createBrowserRouter([
   {
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
       {
         path: '/museummanage',
         element: <MuseumDetailsTable />,
+      },
+      {
+        path: '/blogmanage',
+        element: <BlogMainPage />,
       },
     ],
   },

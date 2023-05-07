@@ -43,7 +43,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
   {
     key: 'Blogs',
     label: 'Blogs',
-    path: '/blogs',
+    path: '/blogmanage',
     icon: <HiOutlineAnnotation />,
   },
 ];
