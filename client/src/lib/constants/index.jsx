@@ -19,7 +19,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
   {
     key: 'Museum',
     label: 'Museum',
-    path: '/museum',
+    path: '/museummanage',
     icon: <HiOutlineCube />,
   },
   {

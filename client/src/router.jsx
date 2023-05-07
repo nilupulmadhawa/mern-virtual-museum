@@ -14,6 +14,7 @@ import ShopViewCards from './components/SouvinirShop/ShopViewCards';
 import ShopViewAccessories from './components/SouvinirShop/ShopViewAccessories';
 import AdminDashboard from './views/AdminDashboard';
 import DashboardLayout from './layout/DashboardLayout';
+import MuseumDetailsTable from './components/dashboard/museummanage/MuseumDetailsTable';
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <AdminDashboard />,
+      },
+      {
+        path: '/museummanage',
+        element: <MuseumDetailsTable />,
       },
     ],
   },
