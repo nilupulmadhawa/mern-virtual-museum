@@ -59,11 +59,11 @@ export default function AddCategory() {
                                   </div>
                                   <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
                                     <h2 class="leading-relaxed">
-                                      Create Category Exhibit
+                                      Create Category for Virtual Museum Shop
                                     </h2>
                                     <p class="text-sm text-gray-500 font-normal leading-relaxed">
-                                      Add new Category Exhibit for the Virtual
-                                      Category.
+                                      Add Souvenir Category for the Virtual
+                                      Museum Shop
                                     </p>
                                   </div>
                                 </div>
@@ -95,11 +95,11 @@ export default function AddCategory() {
                                       <label class="leading-loose">
                                         Category Description
                                       </label>
-                                      <input
-                                        type="text"
+                                      <textarea
+                                        id="message"
+                                        rows="4"
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                        placeholder="Add Description"
-                                      />
+                                      ></textarea>
                                     </div>
                                   </div>
                                 </div>

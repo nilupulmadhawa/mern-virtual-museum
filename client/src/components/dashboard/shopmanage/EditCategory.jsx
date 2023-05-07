@@ -71,11 +71,11 @@ export default function EditCategory() {
                                   </div>
                                   <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
                                     <h2 class="leading-relaxed">
-                                      Update Category Exhibit
+                                      Update Souvenir Category
                                     </h2>
                                     <p class="text-sm text-gray-500 font-normal leading-relaxed">
-                                      Update Category Exhibit for the Virtual
-                                      Category.
+                                      Update Souvenir Category for the Virtual
+                                      Museum Shop
                                     </p>
                                   </div>
                                 </div>
