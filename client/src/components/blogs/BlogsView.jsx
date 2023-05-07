@@ -71,9 +71,9 @@ export default function BlogsView() {
   return (
 
     
-    <div className="bg-white">
+    <div className="bg-white justify-center">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-      <h1 className="font-roboto text-3xl text-center font-bold text-dark-soft md:text-5xl lg:text-4xl xl:text-5xl lg:text-left lg:max-w-[540px] mb-10">
+      <h1 className="font-roboto text-3xl text-center font-bold text-dark-soft md:text-5xl lg:text-4xl xl:text-5xl lg:text-left lg:max-w-[540px] mb-10 mt-20">
         Read the most interesting Blogs
       </h1>
       <p className="text-dark-light mt-4 text-center md:text-xl lg:text-base xl:text-xl lg:text-left mb-10 italic font-bold">
@@ -94,7 +94,7 @@ export default function BlogsView() {
         </button>
       </div>
 
-      <div className="flex mt-4 flex-col lg:flex-row lg:items-start lg:flex-nowrap lg:gap-x-4 lg:mt-7 mb-5">
+      {/* <div className="flex mt-4 flex-col lg:flex-row lg:items-start lg:flex-nowrap lg:gap-x-4 lg:mt-7 mb-5">
         <span className="text-dark-light font-semibold italic mt-2 lg:mt-4 lg:text-sm xl:text-base">
           Popular Tags:
         </span>
@@ -109,7 +109,7 @@ export default function BlogsView() {
             User Interfaces
           </li>
         </ul>
-      </div>
+      </div> */}
 
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 ">
           {products.map((product) => (
@@ -180,7 +180,7 @@ export default function BlogsView() {
     </div>
     </div>
 
-  
+   
   
   );
 }
