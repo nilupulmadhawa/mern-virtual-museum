@@ -37,7 +37,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
   {
     key: 'Events',
     label: 'Events',
-    path: '/events',
+    path: '/eventsmanage',
     icon: <HiOutlineDocumentText />,
   },
   {

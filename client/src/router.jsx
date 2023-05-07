@@ -16,12 +16,13 @@ import AdminDashboard from './views/AdminDashboard';
 import DashboardLayout from './layout/DashboardLayout';
 import MuseumDetailsTable from './components/dashboard/museummanage/MuseumDetailsTable';
 import BlogMainPage from './components/dashboard/blogmanage/BlogMainPage';
-import AddEvent from './views/AddEvent';
-import Events from './views/Events';
-import ManageEvent from './views/ManageEvent';
-import UpdateEvent from './views/UpdateEvent';
+// import AddEvent from './views/AddEvent';
+// import Events from './views/Events';
+// import ManageEvent from './views/ManageEvent';
+// import UpdateEvent from './views/UpdateEvent';
 import EventDetails from './views/EventDetails';
 import NewEvents from './views/NewEvents';
+import ManageEvent from './components/dashboard/eventmanage/ManageEvent';
 
 const router = createBrowserRouter([
   {
@@ -56,22 +57,22 @@ const router = createBrowserRouter([
         path: '/singleitemview',
         element: <SingleItemView />,
       },
-      {
-        path: '/addevent',
-        element: <AddEvent />,
-      },
-      {
-        path: '/events',
-        element: <Events />,
-      },
-      {
-        path: '/manageEvent',
-        element: <ManageEvent />,
-      },
-      {
-        path: '/updateEvent',
-        element: <UpdateEvent />,
-      },
+      // {
+      //   path: '/addevent',
+      //   element: <AddEvent />,
+      // },
+      // {
+      //   path: '/events',
+      //   element: <Events />,
+      // },
+      // {
+      //   path: '/manageEvent',
+      //   element: <ManageEvent />,
+      // },
+      // {
+      //   path: '/updateEvent',
+      //   element: <UpdateEvent />,
+      // },
       {
         path: '/eventDetails',
         element: <EventDetails />,
@@ -115,6 +116,10 @@ const router = createBrowserRouter([
       {
         path: '/blogmanage',
         element: <BlogMainPage />,
+      },
+      {
+        path: '/eventsmanage',
+        element: <ManageEvent />,
       },
     ],
   },
