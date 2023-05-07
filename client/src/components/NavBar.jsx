@@ -181,23 +181,23 @@ const Navbar = ({ logout }) => {
           <div className="bg-white rounded-md shadow-xs">
             <Link
               className={
-                location.pathname === '/create-event'
+                location.pathname === '/newEvents'
                   ? 'block px-4 py-2 text-sm text-gray-700 bg-gray-100 text-blue-900'
                   : 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900'
               }
-              to="/create-event"
+              to="/newEvents"
             >
-              Create Event
+              New Event
             </Link>
             <Link
               className={
-                location.pathname === '/show-all-event'
+                location.pathname === '/eventDetails'
                   ? 'block px-4 py-2 text-sm text-gray-700 bg-gray-100 text-gray-900'
                   : 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900'
               }
-              to="/show-all-event"
+              to="/eventDetails"
             >
-              Show All Event
+              Event Details
             </Link>
           </div>
         </div>
