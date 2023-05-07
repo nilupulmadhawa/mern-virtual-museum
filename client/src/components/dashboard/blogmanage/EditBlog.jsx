@@ -71,7 +71,7 @@ export default function EditBlog() {
                                   </div>
                                   <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
                                     <h2 class="leading-relaxed">
-                                      Create Blog Exhibit
+                                      Edit Blog Exhibit
                                     </h2>
                                     <p class="text-sm text-gray-500 font-normal leading-relaxed">
                                       Edit new Blog Exhibit for the Virtual
