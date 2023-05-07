@@ -102,7 +102,7 @@ export default function ShopViewAccessories() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h1 className="p-5 m-5 mt-3 text-3xl font-extrabold tracking-tight text-slate-900">
+        <h1 className="p-5 m-5 mt-10 text-3xl font-extrabold tracking-tight text-slate-900">
           Accessories
         </h1>
         <br />

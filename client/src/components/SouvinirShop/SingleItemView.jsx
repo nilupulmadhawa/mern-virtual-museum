@@ -83,7 +83,7 @@ export default function SingleItemView() {
         <nav aria-label="Breadcrumb">
           <ol
             role="list"
-            className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8"
+            className="mt mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8"
           >
             {product.breadcrumbs.map((breadcrumb) => (
               <li key={breadcrumb.id}>
@@ -120,7 +120,7 @@ export default function SingleItemView() {
         </nav>
 
         {/* Image gallery */}
-        <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+        <div className="mx-auto mt-20 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8" style={{marginTop:'200px', marginBottom:'200px'}}>
           <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
             <img
               src={product.images[0].src}
@@ -249,7 +249,7 @@ export default function SingleItemView() {
                   leaveTo="translate-x-full"
                 >
                   <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                    <div className="flex h-medium flex-col overflow-y-scroll bg-white shadow-xl mt-20">
+                    <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl mt-30">
                       <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                         <div className="flex items-start justify-between">
                           <Dialog.Title className="text-lg font-medium text-gray-900">

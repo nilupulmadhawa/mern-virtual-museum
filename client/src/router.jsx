@@ -47,7 +47,6 @@ const router = createBrowserRouter([
       {
         path: '/singleitemview',
         element: <SingleItemView />,
-        element: <NotFound />,
       },
     ],
   },
