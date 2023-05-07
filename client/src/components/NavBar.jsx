@@ -139,11 +139,11 @@ const Navbar = ({ logout }) => {
             </Link>
             <Link
               className={
-                location.pathname === '/show-all-event'
+                location.pathname === '/shopcategory'
                   ? 'block px-4 py-2 text-sm text-gray-700 bg-gray-100 text-gray-900'
                   : 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900'
               }
-              to="/show-all-event"
+              to="/shopcategory"
             >
               Show All Categories
             </Link>
