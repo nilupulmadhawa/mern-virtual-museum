@@ -1,7 +1,7 @@
 import React from 'react';
 import ShopCategoryTable from './ShopCategoryTable';
 import ShopProductTable from './ShopProductTable';
-// import ShopOrderTable from './ShopOrderTable';
+import ShopOrderTable from './ShopOrderTable';
 
 export default function ShopMainPage() {
   return (
@@ -12,7 +12,7 @@ export default function ShopMainPage() {
       <br />
       <ShopProductTable />
       <br />
-      {/* <ShopOrderTable /> */}
+      <ShopOrderTable />
     </div>
   );
 }
