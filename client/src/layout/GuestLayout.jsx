@@ -14,9 +14,9 @@ export default function GuestLayout() {
                 <Outlet />
             </div>
             <div className="w-2/5 flex flex-col justify-center text-center">
-                <h3 className="font-bold text-3xl">Surge SE Internship</h3>
-                <h4 className="font-semibold text-2xl mb-5">March 2023</h4>
-                <h1 className="font-bold text-3xl">Nilupul Madhawa</h1>
+                <h3 className="font-bold text-3xl"></h3>
+                <h4 className="font-semibold text-2xl mb-5"></h4>
+                <h1 className="font-bold text-3xl"></h1>
             </div>
         </div>
     );
