@@ -12,6 +12,8 @@ import ShopViewMagnet from './components/SouvinirShop/ShopViewMagnet';
 import SingleItemView from './components/SouvinirShop/SingleItemView';
 import ShopViewCards from './components/SouvinirShop/ShopViewCards';
 import ShopViewAccessories from './components/SouvinirShop/ShopViewAccessories';
+import AdminDashboard from './views/AdminDashboard';
+import DashboardLayout from './layout/DashboardLayout';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +47,7 @@ const router = createBrowserRouter([
       {
         path: '/singleitemview',
         element: <SingleItemView />,
+        element: <NotFound />,
       },
     ],
   },
@@ -59,6 +62,20 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <Signup />,
+      },
+      {
+        path: '/aa',
+        element: <NotFound />,
+      },
+    ],
+  },
+  {
+    path: '/',
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: '/dashboard',
+        element: <AdminDashboard />,
       },
     ],
   },
