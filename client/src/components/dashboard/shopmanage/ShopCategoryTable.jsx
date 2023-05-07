@@ -261,7 +261,7 @@ export default function ShopCategoryTable() {
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                   <div class="flex items-center">
                     <div>
-                      <div class="text-sm leading-5 text-gray-800">#A001</div>
+                      <div class="text-sm leading-5 text-gray-800">#A003</div>
                     </div>
                   </div>
                 </td>
