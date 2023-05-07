@@ -14,74 +14,84 @@ import ShopViewCards from './components/SouvinirShop/ShopViewCards';
 import ShopViewAccessories from './components/SouvinirShop/ShopViewAccessories';
 import AdminDashboard from './views/AdminDashboard';
 import DashboardLayout from './layout/DashboardLayout';
+import MuseumList from './components/MuseumList';
+import Museum from './components/Museum';
 
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <DefaultLayout />,
-    children: [
-      {
+    {
         path: '/',
-        element: <Home />,
-      },
-      {
-        path: '/about',
-        element: <AboutUs />,
-      },
-      {
-        path: '/shopcategory',
-        element: <ShopCategory />,
-      },
-      {
-        path: '/shopviewmagnet',
-        element: <ShopViewMagnet />,
-      },
-      {
-        path: '/shopviewcards',
-        element: <ShopViewCards />,
-      },
-      {
-        path: '/shopviewaccessories',
-        element: <ShopViewAccessories />,
-      },
-      {
-        path: '/singleitemview',
-        element: <SingleItemView />,
-      },
-    ],
-  },
-  {
-    path: '/',
-    element: <GuestLayout />,
-    children: [
-      {
-        path: '/login',
-        element: <Login />,
-      },
-      {
-        path: '/signup',
-        element: <Signup />,
-      },
-      {
-        path: '/aa',
+        element: <DefaultLayout />,
+        children: [
+            {
+                path: '/',
+                element: <Home />,
+            },
+            {
+                path: '/about',
+                element: <AboutUs />,
+            },
+            {
+                path: '/shopcategory',
+                element: <ShopCategory />,
+            },
+            {
+                path: '/shopviewmagnet',
+                element: <ShopViewMagnet />,
+            },
+            {
+                path: '/shopviewcards',
+                element: <ShopViewCards />,
+            },
+            {
+                path: '/shopviewaccessories',
+                element: <ShopViewAccessories />,
+            },
+            {
+                path: '/singleitemview',
+                element: <SingleItemView />,
+            },
+            {
+                path: '/museumlist',
+                element: <MuseumList />,
+            },
+        ],
+    },
+    {
+        path: '/museum',
+        element: < Museum />,
+    },
+    {
+        path: '/',
+        element: <GuestLayout />,
+        children: [
+            {
+                path: '/login',
+                element: <Login />,
+            },
+            {
+                path: '/signup',
+                element: <Signup />,
+            },
+            {
+                path: '/aa',
+                element: <NotFound />,
+            },
+        ],
+    },
+    {
+        path: '/',
+        element: <DashboardLayout />,
+        children: [
+            {
+                path: '/dashboard',
+                element: <AdminDashboard />,
+            },
+        ],
+    },
+    {
+        path: '*',
         element: <NotFound />,
-      },
-    ],
-  },
-  {
-    path: '/',
-    element: <DashboardLayout />,
-    children: [
-      {
-        path: '/dashboard',
-        element: <AdminDashboard />,
-      },
-    ],
-  },
-  {
-    path: '*',
-    element: <NotFound />,
-  },
+    },
 ]);
 
 export default router;
