@@ -6,7 +6,8 @@ import Login from './views/Login';
 import NotFound from './views/NotFound';
 import Signup from './views/Signup';
 import Home from './views/Home';
-import Dashboard from './views/Dashboard';
+import AdminDashboard from './views/AdminDashboard';
+import DashboardLayout from './layout/DashboardLayout';
 
 const router = createBrowserRouter([
   {
@@ -39,9 +40,15 @@ const router = createBrowserRouter([
         path: '/aa',
         element: <NotFound />,
       },
+    ],
+  },
+  {
+    path: '/',
+    element: <DashboardLayout />,
+    children: [
       {
-        path: 'dashboard',
-        element: <Dashboard />,
+        path: '/dashboard',
+        element: <AdminDashboard />,
       },
     ],
   },
