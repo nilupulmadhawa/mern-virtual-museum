@@ -1,22 +1,36 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
-import DefaultLayout from "./layout/DefaultLayout";
-import GuestLayout from "./layout/GuestLayout";
+import { createBrowserRouter } from 'react-router-dom';
+import DefaultLayout from './layout/DefaultLayout';
+import GuestLayout from './layout/GuestLayout';
 
+import Login from './views/Login';
+import NotFound from './views/NotFound';
+import Signup from './views/Signup';
+import Home from './views/Home';
+import AboutUs from './components/about/AboutUs';
+import ShopCategory from './components/SouvinirShop/ShopCategory';
+import ShopViewMagnet from './components/SouvinirShop/ShopViewMagnet';
+import SingleItemView from './components/SouvinirShop/SingleItemView';
+import ShopViewCards from './components/SouvinirShop/ShopViewCards';
+import ShopViewAccessories from './components/SouvinirShop/ShopViewAccessories';
+import AdminDashboard from './views/AdminDashboard';
+import DashboardLayout from './layout/DashboardLayout';
+import MuseumDetailsTable from './components/dashboard/museummanage/MuseumDetailsTable';
+import BlogMainPage from './components/dashboard/blogmanage/BlogMainPage';
 
-import Login from "./views/Login";
-import NotFound from "./views/NotFound";
-import Signup from "./views/Signup";
-import Home from "./views/Home";
-import BlogsView from "./components/blogs/BlogsView";
-import BlogView from "./components/blogs/BlogView";
-import ArticlesView from "./components/blogs/ArticlesView";
-import BlogsView from "./components/blogs/BlogsView";
-import BlogView from "./components/blogs/BlogView";
-import ArticlesView from "./components/blogs/ArticlesView";
-
+import EventDetails from './views/EventDetails';
+import NewEvents from './views/NewEvents';
+import ManageEvent from './components/dashboard/eventmanage/ManageEvent';
+import ShopMainPage from './components/dashboard/shopmanage/ShopMainPage';
+import ArticlesView from './components/blogs/ArticlesView';
+import BlogsView from './components/blogs/BlogsView';
+import BlogView from './components/blogs/BlogView';
 
 const router = createBrowserRouter([
-    {
+  {
+    path: '/',
+    element: <DefaultLayout />,
+    children: [
+      {
         path: '/',
         element: <Home />,
       },
@@ -44,7 +58,7 @@ const router = createBrowserRouter([
         path: '/singleitemview',
         element: <SingleItemView />,
       },
-
+     
       {
         path: '/eventDetails',
         element: <EventDetails />,
@@ -52,10 +66,6 @@ const router = createBrowserRouter([
       {
         path: '/newEvents',
         element: <NewEvents />,
-      },
-      {
-        path: '/museumlist',
-        element: <MuseumList />,
       },
       {
         path: '/blogsview',
@@ -88,10 +98,6 @@ const router = createBrowserRouter([
         element: <NotFound />,
       },
     ],
-  },
-  {
-    path: '/museum',
-    element: <Museum />,
   },
   {
     path: '/',
