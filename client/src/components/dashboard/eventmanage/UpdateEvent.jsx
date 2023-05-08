@@ -71,11 +71,10 @@ export default function UpdateEvent() {
                                   </div>
                                   <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
                                     <h2 class="leading-relaxed">
-                                      Update Event Exhibit
+                                      Update Event
                                     </h2>
                                     <p class="text-sm text-gray-500 font-normal leading-relaxed">
-                                      Update Event Exhibit for the Virtual
-                                      Event.
+                                      Update existing event for Virtual Museum.
                                     </p>
                                   </div>
                                 </div>
@@ -87,7 +86,7 @@ export default function UpdateEvent() {
                                       </label>
                                       <input
                                         type="text"
-                                        value={'Natural History'}
+                                        
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                         placeholder="Add Event
              Title"
@@ -123,7 +122,7 @@ export default function UpdateEvent() {
                                         <div class="relative focus-within:text-gray-600 text-gray-400">
                                           <input
                                             type="date"
-                                            value={'07/05/2021'}
+                                     
                                             class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                             placeholder="07/05/2023"
                                           />
@@ -152,7 +151,7 @@ export default function UpdateEvent() {
                                         <div class="relative focus-within:text-gray-600 text-gray-400">
                                           <input
                                             type="date"
-                                            value={'10/05/2021'}
+                                          
                                             class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                             placeholder="10/05/2023"
                                           />
@@ -181,7 +180,7 @@ export default function UpdateEvent() {
                                       </label>
                                       <input
                                         type="text"
-                                        value={'Natural History'}
+                                       
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                         placeholder="Add Category"
                                       />
@@ -192,9 +191,7 @@ export default function UpdateEvent() {
                                       </label>
                                       <input
                                         type="text"
-                                        value={
-                                          'This exhibit features a collection of natural history specimens, including fossils, taxidermy animals, and plant specimens.'
-                                        }
+                                        
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                         placeholder="Add Description"
                                       />

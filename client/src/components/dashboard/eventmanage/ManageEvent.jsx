@@ -259,7 +259,7 @@ export default function ManageEvent() {
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                   <div class="flex items-center">
                     <div>
-                      <div class="text-sm leading-5 text-gray-800">#1</div>
+                      <div class="text-sm leading-5 text-gray-800">#3</div>
                     </div>
                   </div>
                 </td>
@@ -346,7 +346,7 @@ export default function ManageEvent() {
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                   <div class="flex items-center">
                     <div>
-                      <div class="text-sm leading-5 text-gray-800">#1</div>
+                      <div class="text-sm leading-5 text-gray-800">#4</div>
                     </div>
                   </div>
                 </td>
@@ -433,7 +433,7 @@ export default function ManageEvent() {
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                   <div class="flex items-center">
                     <div>
-                      <div class="text-sm leading-5 text-gray-800">#1</div>
+                      <div class="text-sm leading-5 text-gray-800">#5</div>
                     </div>
                   </div>
                 </td>

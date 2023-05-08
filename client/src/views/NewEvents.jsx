@@ -50,9 +50,9 @@ export default function NewEvents() {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-medium leading-6 dark:text-gray-50">
-                    Date & Time
+                    Start Date
                   </h4>
-                  <p className="mt-2 dark:text-gray-400">15-05-2023 at 3pm.</p>
+                  <p className="mt-2 dark:text-gray-400">07-05-2023</p>
                 </div>
               </div>
               <div className="flex">
@@ -77,10 +77,10 @@ export default function NewEvents() {
                 <div className="ml-4">
                   <h4 className="text-lg font-medium leading-6 dark:text-gray-50">
                     {' '}
-                    Location
+                    Event Category
                   </h4>
                   <p className="mt-2 dark:text-gray-400">
-                    Great Court and front lawn.
+                    Cultural
                   </p>
                 </div>
               </div>
@@ -105,10 +105,10 @@ export default function NewEvents() {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-medium leading-6 dark:text-gray-50">
-                    Age limit
+                    Event Description
                   </h4>
                   <p className="mt-2 dark:text-gray-400">
-                    Suitable for all ages.
+                    This is a very important event.
                   </p>
                 </div>
               </div>

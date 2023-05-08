@@ -59,11 +59,10 @@ export default function AddEvent() {
                                   </div>
                                   <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
                                     <h2 class="leading-relaxed">
-                                      Create Event Exhibit
+                                      Create new Event 
                                     </h2>
                                     <p class="text-sm text-gray-500 font-normal leading-relaxed">
-                                      Add new Event Exhibit for the Virtual
-                                      Event.
+                                     Create new event for the Virtual Museum.
                                     </p>
                                   </div>
                                 </div>
@@ -86,7 +85,7 @@ export default function AddEvent() {
                                         Event Image
                                       </label>
                                       <input
-                                        type="text"
+                                        type="file"
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                         placeholder="Add Category"
                                       />
@@ -98,7 +97,7 @@ export default function AddEvent() {
                                       <input
                                         type="text"
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                        placeholder="Update Event Subtitle"
+                                        placeholder="Add Event Subtitle"
                                       />
                                     </div>
 
@@ -109,7 +108,7 @@ export default function AddEvent() {
                                         </label>
                                         <div class="relative focus-within:text-gray-600 text-gray-400">
                                           <input
-                                            type="text"
+                                            type="date"
                                             class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                             placeholder="07/05/2023"
                                           />
@@ -137,7 +136,7 @@ export default function AddEvent() {
                                         </label>
                                         <div class="relative focus-within:text-gray-600 text-gray-400">
                                           <input
-                                            type="text"
+                                            type="date"
                                             class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                             placeholder="10/05/2023"
                                           />
