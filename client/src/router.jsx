@@ -54,12 +54,13 @@ const router = createBrowserRouter([
                 path: '/museumlist',
                 element: <MuseumList />,
             },
+            {
+                path: '/museum',
+                element: < Museum />,
+            },
         ],
     },
-    {
-        path: '/museum',
-        element: < Museum />,
-    },
+
     {
         path: '/',
         element: <GuestLayout />,
