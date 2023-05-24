@@ -32,11 +32,11 @@ export const getCategoryByID = async (id) => {
   }
 };
 
-export const updateCategorydetails = async (categoryId, CategoryDetails) => {
+export const updateCategorydetails = async (categoryId, categoryDetails) => {
   try {
     const updatedCategory = await findOneAndUpdateCategory(
       { _id: categoryId },
-      CategoryDetails
+      categoryDetails
     );
     if (!updatedCategory)
       return {
