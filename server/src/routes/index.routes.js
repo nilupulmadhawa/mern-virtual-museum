@@ -1,10 +1,10 @@
 import express from 'express';
-import userRouter from './user.routes';
-import authRouter from './auth.routes';
+import locationRouter from './location.routes';
+import museumRouter from './museum.routes';
 
 const router = express.Router();
 
-router.use('/user', userRouter);
-router.use('/auth', authRouter);
+router.use('/location', locationRouter);
+router.use('/museum', museumRouter);
 
 export default router;
