@@ -1,8 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AddProduct from './AddProduct';
 import EditProduct from './EditProduct';
+import axios from 'axios';
 
 export default function ShopProductTable() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
+  const PF = 'http://localhost:5000/images/';
+
+  const [data, setData] = useState([]);
+
+  const getdata = () => {
+    axios
+      .get('http://localhost:5000/api/product/')
+      .then((res) => {
+        setData(res.data.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getdata();
+  }, []);
+
+  useEffect(() => {
+    setFilteredData(
+      data.filter((row) =>
+        row.category.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+  }, [searchQuery, data]);
+
+  const handleDelete = (_id) => {
+    axios
+      .delete(`http://localhost:5000/api/product/${_id}`)
+      .then((res) => {
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div>
       <h2 className="mb-10 mt-10 text-2xl font-semibold leading-tight">
@@ -43,8 +84,10 @@ export default function ShopProductTable() {
                 </div>
                 <input
                   type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   class="flex-shrink flex-grow flex-auto leading-normal tracking-wide w-px flex-1 border border-none border-l-0 rounded rounded-l-none px-3 relative focus:outline-none text-xxs lg:text-xs lg:text-base text-gray-500 font-thin"
-                  placeholder="Search"
+                  placeholder="Search by category"
                 />
               </div>
             </div>
@@ -54,9 +97,6 @@ export default function ShopProductTable() {
           <table class="min-w-full">
             <thead>
               <tr>
-                <th class="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-blue-500 tracking-wider">
-                  ID
-                </th>
                 <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
                   Name
                 </th>
@@ -79,254 +119,87 @@ export default function ShopProductTable() {
               </tr>
             </thead>
             <tbody class="bg-white">
-              <tr>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div class="flex items-center">
-                    <div>
-                      <div class="text-sm leading-5 text-gray-800">#P001</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div class="text-sm leading-5 text-blue-900">
-                    Luke A Tuke Fridge Magnet Plywood Sri Lanka
-                  </div>
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div class="text-sm leading-5 text-blue-900">Magnets</div>
-                </td>
-
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  <img
-                    class="rounded-lg"
-                    src="https://objectstorage.ap-mumbai-1.oraclecloud.com/n/softlogicbicloud/b/cdn/o/products/400-600/180912911--1--1654058017.jpeg"
-                    alt="image description"
-                  />
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  LKR 2000.00
-                </td>
-
-                <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
-                  <td class="py-3 px-6 text-center">
-                    <div class="flex item-center justify-center">
-                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                          />
-                        </svg>
-                      </div>
-                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                          />
-                        </svg>
-                      </div>
-                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                          />
-                        </svg>
-                      </div>
+              {filteredData.map((row) => (
+                <tr key={row.id}>
+                  <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                    <div class="text-sm leading-5 text-blue-900">
+                      {row.product}
                     </div>
                   </td>
-                </td>
-              </tr>
-              <tr>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div class="flex items-center">
-                    <div>
-                      <div class="text-sm leading-5 text-gray-800">#P002</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div class="text-sm leading-5 text-blue-900">
-                    Playing Elephant Fridge Magnet
-                  </div>
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div class="text-sm leading-5 text-blue-900">
-                    Bookmarks & Cards
-                  </div>
-                </td>
-
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  <img
-                    class="rounded-lg"
-                    src="https://objectstorage.ap-mumbai-1.oraclecloud.com/n/softlogicbicloud/b/cdn/o/products/400-600/1700005123001--1--1628227307.jpeg"
-                    alt="image description"
-                  />
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  LKR 550.00
-                </td>
-
-                <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
-                  <td class="py-3 px-6 text-center">
-                    <div class="flex item-center justify-center">
-                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                          />
-                        </svg>
-                      </div>
-                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                          />
-                        </svg>
-                      </div>
-                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                          />
-                        </svg>
-                      </div>
+                  <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                    <div class="text-sm leading-5 text-blue-900">
+                      {' '}
+                      {row.category}
                     </div>
                   </td>
-                </td>
-              </tr>
-              <tr>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div class="flex items-center">
-                    <div>
-                      <div class="text-sm leading-5 text-gray-800">#P003</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div class="text-sm leading-5 text-blue-900">
-                    Sri lankan traditional handmade wooden bookmark gift for
-                    book lovers
-                  </div>
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div class="text-sm leading-5 text-blue-900">Book Mark</div>
-                </td>
 
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  <img
-                    class="rounded-lg"
-                    src="https://i.ebayimg.com/images/g/8xYAAOSwoO9jY2fq/s-l1600.png"
-                    alt="image description"
-                  />
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  LKR 1400.00
-                </td>
-
-                <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
-                  <td class="py-3 px-6 text-center">
-                    <div class="flex item-center justify-center">
-                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                          />
-                        </svg>
-                      </div>
-                      {/* //// */}
-                      <EditProduct />
-                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                          />
-                        </svg>
-                      </div>
-                    </div>
+                  <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+                    <img
+                      src={PF + row.image}
+                      class="img-fluid mb-5 img-thumbnail shadow-sm"
+                      alt=""
+                      style={{ width: '100px', height: '100px' }}
+                    />
                   </td>
-                </td>
-              </tr>
+                  <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+                    {row.price}
+                  </td>
+
+                  <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
+                    <td class="py-3 px-6 text-center">
+                      <div class="flex item-center justify-center">
+                        <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                            />
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                            />
+                          </svg>
+                        </div>
+                        {/* //// */}
+                        <EditProduct
+                          id={row._id}
+                          category={row.category}
+                          product={row.product}
+                          image={row.image}
+                          price={row.price}
+                        />
+                        <div
+                          class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
+                          onClick={() => handleDelete(row._id)}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </td>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
