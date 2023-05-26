@@ -19,13 +19,13 @@ export const DASHBOARD_SIDEBAR_LINKS = [
   {
     key: 'Museum',
     label: 'Museum',
-    path: '/museum',
+    path: '/museummanage',
     icon: <HiOutlineCube />,
   },
   {
     key: 'Shop',
     label: 'Shop',
-    path: '/shop',
+    path: '/shopmanage',
     icon: <HiOutlineShoppingCart />,
   },
   {
@@ -37,13 +37,13 @@ export const DASHBOARD_SIDEBAR_LINKS = [
   {
     key: 'Events',
     label: 'Events',
-    path: '/events',
+    path: '/eventsmanage',
     icon: <HiOutlineDocumentText />,
   },
   {
     key: 'Blogs',
     label: 'Blogs',
-    path: '/blogs',
+    path: '/blogmanage',
     icon: <HiOutlineAnnotation />,
   },
 ];
