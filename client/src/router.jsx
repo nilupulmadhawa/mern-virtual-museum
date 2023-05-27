@@ -86,10 +86,14 @@ const router = createBrowserRouter([
                 path: '/museumlist',
                 element: <MuseumList />,
             },
+            {
+                path: '/login',
+                element: <Login />,
+            },
         ],
     },
     {
-        path: '/museum/:lat/:lng',
+        path: '/museum/:id',
         element: <Museum />,
     },
 
@@ -97,10 +101,6 @@ const router = createBrowserRouter([
         path: '/',
         element: <GuestLayout />,
         children: [
-            {
-                path: '/login',
-                element: <Login />,
-            },
             {
                 path: '/signup',
                 element: <Signup />,

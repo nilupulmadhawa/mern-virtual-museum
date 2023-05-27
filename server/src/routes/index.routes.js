@@ -4,10 +4,11 @@ import museumRouter from './museum.routes';
 import categoryRouter from './category.routes';
 import orderRouter from './order.routes';
 import productRouter from './product.routes';
+import authRouter from './auth.routes';
 
 const router = express.Router();
 
-// router.use('/location', locationRouter);
+router.use('/auth', authRouter);
 router.use('/museum', museumRouter);
 router.use('/category', categoryRouter);
 router.use('/order', orderRouter);

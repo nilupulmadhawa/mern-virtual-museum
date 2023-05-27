@@ -4,14 +4,20 @@ import EditMuseumModal from './EditMuseumModal';
 import { getAllMuseums } from '../../../services/museum';
 import DeleteMuseumModal from './DeleteMuseumModal';
 import { Link } from 'react-router-dom';
+import { useStateContext } from '../../../context/ContextProvider';
 
 export default function MuseumDetailsTable() {
     const [open, setOpen] = useState(false);
     const [table, setTable] = useState([]);
-
+    const { setLoading } = useStateContext();
     const _getTableData = () => {
+        setLoading(true)
         getAllMuseums().then((res) => {
             setTable(res.data);
+            setLoading(false)
+        }).catch((err) => {
+            console.log("ERR", err)
+            setLoading(false)
         });
     }
 
@@ -123,7 +129,7 @@ export default function MuseumDetailsTable() {
                                         </td>
                                         <td className="px-3 text-center  py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
                                             <div className="flex item-center justify-center">
-                                                <Link to={`/museum/${row.lat}/${row.lng}}`} rel="noreferrer" target={'_blank'} >
+                                                <Link to={`/museum/${row._id}`} rel="noreferrer" target={'_blank'} >
                                                     <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"

@@ -1,138 +1,69 @@
-import { createRef } from "react";
 import { useStateContext } from "../context/ContextProvider.jsx";
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import { login } from "../services/auth.js";
 
 export default function Login() {
-    const emailRef = createRef();
-    const passwordRef = createRef();
     const { setUser, setToken, setLoading } = useStateContext();
-    const [message, setMessage] = useState(null);
-
-    const onSubmit = (ev) => {
+    const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const _onLogin = (ev) => {
         ev.preventDefault();
         setLoading(true);
 
         const payload = {
-            email: emailRef.current.value,
-            password: passwordRef.current.value,
+            email: email,
+            password: password,
         };
-        // axiosClient
-        //     .post("/login", payload)
-        //     .then(({ data }) => {
-        //         setLoading(false);
-        //         setUser(data.user);
-        //         setToken(data.token);
-        //         toast.success("Login successfully");
-        //     })
-        //     .catch((err) => {
-        //         setLoading(false);
-        //         const response = err.response;
-        //         if (response && response.status === 422) {
-        //             toast.error(response.data.message);
-        //             // setMessage(response.data.message);
-        //         }
-        //     });
+
+        login(payload).then((res) => {
+            console.log(res);
+            setLoading(false);
+            setUser(res.data.user);
+            setToken(res.data.access_token);
+            navigate('/dashboard');
+        }).catch((err) => {
+            setLoading(false);
+        })
     };
 
     return (
         <>
-            <section className="h-screen items-center">
-                <div className=" sm:m-10  h-screen items-center flex   m-auto">
-                    <div className="flex justify-center flex-wrap g-6 text-gray-800 sm:shadow sm:rounded-lg w-9/12 m-auto justify-center ">
-                        {/* title sign up */}
-                        <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
-                            {/* logo in left side */}
-                            {/* lg:py-0 md:py-5 sm:py-5 md:justify-left md:absolute md:top-10 sm:justify-left sm:absolute sm:top-10 */}
-                            <div className="flex lg:pb-10 ">
-                                <img
-                                    src="/logo.png"
-                                    alt="logo"
-                                    className="w-1/2 object-cover pt-5"
-                                />
-                            </div>
-                            <form onSubmit={onSubmit} className="sm:w-3/4 h-full">
-                                {message && (
-                                    <div className="alert">
-                                        <p>{message}</p>
-                                    </div>
-                                )}
-                                <div className="text-gray-600 text-3xl text-left mb-5 font-bold">
-                                    <h1>SIGN IN</h1>
-                                </div>
-                                <div className="mb-6">
-                                    <label
-                                        for="email"
-                                        className="block mb-2 text-sm font-small text-gray-600"
-                                    >
-                                        Email
-                                    </label>
+            <section class="bg-gray-50 dark:bg-gray-900">
+                <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+                    <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                                Sign in to your account
+                            </h1>
+                            <form class="space-y-4 md:space-y-6" onSubmit={_onLogin}>
+                                <div>
+                                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                                     <input
-                                        ref={emailRef}
-                                        required
+                                        id="email-address"
+                                        name="email"
                                         type="email"
-                                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                        required
                                         placeholder="Email address"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </div>
-                                <div className="mb-6">
-                                    <label
-                                        for="password"
-                                        className="block mb-2 text-sm font-small text-gray-600"
-                                    >
-                                        Password
-                                    </label>
+                                <div>
+                                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                                     <input
-                                        ref={passwordRef}
+                                        placeholder="••••••••"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        id="password"
+                                        name="password"
                                         type="password"
                                         required
-                                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                        placeholder="Password"
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </div>
-                                <div className="flex justify-end mb-6">
-                                    {/* <div className="form-group form-check">
-                                        <input
-                                            type="checkbox"
-                                            className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                                            id="exampleCheck3"
-                                            checked
-                                        />
-                                        <label
-                                            className="form-check-label inline-block text-gray-800"
-                                            for="exampleCheck2"
-                                        >
-                                            Remember me
-                                        </label>
-                                    </div> */}
-                                    {/* <a
-                                        href="#!"
-                                        className="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
-                                    >
-                                        Forgot password?
-                                    </a> */}
-                                </div>
-                                {/*button css background: rgba(131, 217, 237, 0.3); X:
-                                1060px  Y: 271px W: 552px H: 552px  X
-                                constraint: Left  Y constraint: Top Fill:
-                                Solid  */}
-                                <div className="flex justify-center">
-                                    <button
-                                        type="submit"
-                                        className="mb-5 w-2/5 px-4 py-2 text-xl font-bold text-white bg-gradient-to-r from-cyan-500 to-cyan-300 rounded-lg shadow-md hover:from-cyan-600 hover:to-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-75"
-                                    >
-                                        {/* from-btn2 to-btn1 */}
-                                        Sign In
-                                    </button>
-                                </div>
+                                <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
                             </form>
-                        </div>
-                        <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
-                            <img
-                                // src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-                                src="/image.png"
-                                className="w-full object-cover"
-                                alt="Phone image"
-                            />
                         </div>
                     </div>
                 </div>
