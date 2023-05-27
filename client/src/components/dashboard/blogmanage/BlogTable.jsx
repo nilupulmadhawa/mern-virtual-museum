@@ -311,30 +311,10 @@ export default function BlogTable() {
                   />
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  Beyond the Museums exhibitions lies a labyrinth of hallways,
-                  vast storage roomsand busy offices, all filled with the sights
-                  and sounds of discovery.
+                  
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  Over the past three centuries, people have collected objects
-                  and specimens and placed them in natural history museums
-                  throughout the world. Taken as a whole, this global collection
-                  is the physical basis for our understanding of the natural
-                  world and our place in it, an unparalleled source of
-                  information that is directly relevant to issues as diverse as
-                  wildlife conservation, climate change, pandemic preparedness,
-                  food security, invasive species, rare minerals, and the
-                  bioeconomy (1). Strategic coordination and use of the global
-                  collection has the potential to focus future collecting and
-                  guide decisions that are relevant to the future of humanity
-                  and biodiversity. To begin to map the aggregate holdings of
-                  the global collection, we describe here a simple and fast
-                  method to assess the contents of any natural history museum,
-                  and report results based on our assessment of 73 of the
-                  world’s largest natural history museums and herbaria from 28
-                  countries.Today, more than a thousand natural history museums
-                  exist, with the largest ones located in Europe and North
-                  America.
+                  
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
                   <td class="py-3 px-6 text-center">
