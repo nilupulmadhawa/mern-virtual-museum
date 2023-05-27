@@ -4,9 +4,10 @@ import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 export default function AddArticle() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const cancelButtonRef = useRef(null);
+
   return (
     <div>
       <button

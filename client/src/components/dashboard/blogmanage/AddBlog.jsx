@@ -3,10 +3,13 @@ import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
+
 export default function AddBlog() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const cancelButtonRef = useRef(null);
+
+
   return (
     <div>
       <button
