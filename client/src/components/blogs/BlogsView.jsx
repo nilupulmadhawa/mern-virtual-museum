@@ -1,49 +1,50 @@
-import react from 'react';
+import react, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getAllBlogs } from '../../services/blog';
 
-const products = [
-  {
-    id: 1,
+// const products = [
+//   {
+//     id: 1,
 
-    href: '/blogview',
+//     href: '/blogview',
 
-    imageSrc:
-      'https://images.pexels.com/photos/460736/pexels-photo-460736.jpeg?cs=srgb&dl=pexels-pixabay-460736.jpg&fm=jpg',
-    imageAlt:
-      'Tall slender porcelain bottle with natural clay textured body and cork stopper.',
-  },
-  {
-    id: 2,
-    name: 'Nomad Tumbler',
-    href: '#',
-    price: '$35',
-    imageSrc:
-      'https://www.edra.com/ridimensiona.html/cms/1280/768/100__/cms/custom/files/100067/ct50012_id210246_t1/WhatsApp_Image_20211207_at_170857.jpeg',
-    imageAlt:
-      'Olive drab green insulated bottle with flared screw lid and flat top.',
-  },
-  {
-    id: 3,
-    name: 'Focus Paper Refill',
-    href: '#',
-    price: '$89',
-    imageSrc:
-      'https://news.artnet.com/app/news-upload/2019/10/Preview_Caravaggio_TR_14Oktb_06-1024x683.jpg',
-    imageAlt:
-      'Person using a pen to cross a task off a productivity paper card.',
-  },
-  {
-    id: 4,
-    name: 'Machined Mechanical Pencil',
-    href: '#',
-    price: '$35',
-    imageSrc:
-      'https://downtownvienna.com/wp-content/uploads/2019/12/77068876_127685834964905_1200170327546911141_n-300x300.jpg',
-    imageAlt:
-      'Hand holding black machined steel mechanical pencil with brass tip and top.',
-  },
-  // More products...
-];
+//     imageSrc:
+//       'https://images.pexels.com/photos/460736/pexels-photo-460736.jpeg?cs=srgb&dl=pexels-pixabay-460736.jpg&fm=jpg',
+//     imageAlt:
+//       'Tall slender porcelain bottle with natural clay textured body and cork stopper.',
+//   },
+//   {
+//     id: 2,
+//     name: 'Nomad Tumbler',
+//     href: '#',
+//     price: '$35',
+//     imageSrc:
+//       'https://www.edra.com/ridimensiona.html/cms/1280/768/100__/cms/custom/files/100067/ct50012_id210246_t1/WhatsApp_Image_20211207_at_170857.jpeg',
+//     imageAlt:
+//       'Olive drab green insulated bottle with flared screw lid and flat top.',
+//   },
+//   {
+//     id: 3,
+//     name: 'Focus Paper Refill',
+//     href: '#',
+//     price: '$89',
+//     imageSrc:
+//       'https://news.artnet.com/app/news-upload/2019/10/Preview_Caravaggio_TR_14Oktb_06-1024x683.jpg',
+//     imageAlt:
+//       'Person using a pen to cross a task off a productivity paper card.',
+//   },
+//   {
+//     id: 4,
+//     name: 'Machined Mechanical Pencil',
+//     href: '#',
+//     price: '$35',
+//     imageSrc:
+//       'https://downtownvienna.com/wp-content/uploads/2019/12/77068876_127685834964905_1200170327546911141_n-300x300.jpg',
+//     imageAlt:
+//       'Hand holding black machined steel mechanical pencil with brass tip and top.',
+//   },
+//   // More products...
+// ];
 
 const posts = [
   {
@@ -68,6 +69,18 @@ const posts = [
 ];
 
 export default function BlogsView() {
+  const [table, setTable] = useState([]);
+
+  const _getTableData = () => {
+    getAllBlogs().then((res) => {
+        setTable(res.data);
+    });
+}
+
+useEffect(() => {
+    _getTableData()
+}, [])
+
   return (
     <div className="bg-white justify-center">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -111,12 +124,12 @@ export default function BlogsView() {
       </div> */}
  
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 ">
-          {products.map((product) => (
-            <Link key={product.id} to={product.href} className="group">
+          {table.map((product) => (
+            <Link key={product.id} to="/blogview" className="group">
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7 h-96">
                 <img
-                  src={product.imageSrc}
-                  alt={product.imageAlt}
+                  src={product.image}
+                  alt=""
                   className="h-full w-full object-cover object-center group-hover:opacity-75 mb-10"
                 />
               </div>
@@ -151,11 +164,7 @@ export default function BlogsView() {
                     </button>
                   </div>
                   <div className="relative mt-8 flex items-center gap-x-4">
-                    <img
-                      src={post.author.imageUrl}
-                      alt=""
-                      className="h-10 w-10 rounded-full bg-gray-50"
-                    />
+                    
                     <div className="text-sm leading-6">
                       <p className="font-semibold text-gray-900">
                         <a href={post.author.href}>
