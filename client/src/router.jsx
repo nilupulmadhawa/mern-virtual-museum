@@ -45,7 +45,7 @@ const router = createBrowserRouter([
         element: <ShopCategory />,
       },
       {
-        path: '/shopviewmagnet',
+        path: '/shopview/:cat',
         element: <ShopViewMagnet />,
       },
       {

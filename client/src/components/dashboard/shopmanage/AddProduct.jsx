@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useStateContext } from '../../../context/ContextProvider';
@@ -6,11 +6,13 @@ import { toast } from 'react-toastify';
 import { storage } from '../../../services/firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { addProduct } from '../../../services/product';
+import { getAllCategorys } from '../../../services/category';
 
 export default function AddProduct({ getTableData }) {
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState(null);
   const [form, setForm] = useState({});
+  const [category, setCategory] = useState([]);
   const { setLoading } = useStateContext();
 
   const _addProduct = async (e) => {
@@ -72,6 +74,14 @@ export default function AddProduct({ getTableData }) {
   };
 
   const cancelButtonRef = useRef(null);
+
+  useEffect(() => {
+    getAllCategorys().then((res) => {
+      if (res.success) {
+        setCategory(res.data);
+      }
+    });
+  }, []);
 
   return (
     <div>
@@ -158,7 +168,27 @@ export default function AddProduct({ getTableData }) {
                                         <label class="leading-loose">
                                           Product Category
                                         </label>
-                                        <input
+                                        <select
+                                          id="countries"
+                                          value={form.category}
+                                          onChange={(e) =>
+                                            setForm({
+                                              ...form,
+                                              category: e.target.value,
+                                            })
+                                          }
+                                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                                        >
+                                          <option selected>
+                                            Choose a countrie
+                                          </option>
+                                          {category?.map((item) => (
+                                            <option value={item.category}>
+                                              {item.category}
+                                            </option>
+                                          ))}
+                                        </select>
+                                        {/* <input
                                           type="text"
                                           value={form.category}
                                           onChange={(e) =>
@@ -170,7 +200,7 @@ export default function AddProduct({ getTableData }) {
                                           class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                           placeholder="Add Product
              Title"
-                                        />
+                                        /> */}
                                       </div>
 
                                       <div class="flex flex-col">

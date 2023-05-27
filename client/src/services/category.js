@@ -12,7 +12,7 @@ export const getAllCategorys = async (query = 'sort[created_at]=-1') => {
   return await apiRequest(() => axiosInstance.get(`/category?${query}`));
 };
 
-export const getMyCategorys = async (id) => {
+export const getCategory = async (id) => {
   return await apiRequest(() => axiosInstance.get(`/category/${id}`));
 };
 
