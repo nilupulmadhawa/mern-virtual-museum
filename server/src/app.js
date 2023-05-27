@@ -19,15 +19,17 @@ app.use(express.json({ limit: '1mb' }));
 
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => res.status(200).json({ message: 'Server Up and Running' }));
+app.get('/', (req, res) =>
+  res.status(200).json({ message: 'Server Up and Running' })
+);
 
 app.use('/api', routes);
-app.use(errors())
+app.use(errors());
 
 connectDB();
 
 const port = process.env.PORT || 3001;
 
 app.listen(port, () => {
-    console.log(`Server successfully started on port ${port}`)
-})
+  console.log(`Server successfully started on port ${port}`);
+});

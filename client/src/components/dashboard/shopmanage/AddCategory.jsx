@@ -1,12 +1,67 @@
 import React from 'react';
 import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export default function AddCategory() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const cancelButtonRef = useRef(null);
+
+  const [category, setCategory] = useState('');
+  const [description, setDescription] = useState('');
+  const [image, setImage] = useState('');
+  const [is_active, setIsActive] = useState(false);
+
+  const [file, setFile] = useState(null);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const data = new FormData();
+    const filename = Date.now() + file.name;
+    data.append('name', filename);
+    data.append('file', file);
+    data.image = filename;
+
+    try {
+      await axios.post('http://localhost:5000/api/upload', data);
+    } catch (err) {
+      alert(err);
+    }
+
+    const catdata = {
+      category,
+      description,
+      image: data.image,
+      is_active: true,
+    };
+    console.log(catdata);
+
+    axios
+      .post('http://localhost:5000/api/category/', catdata)
+
+      .then(function (response) {
+        console.log('1111');
+        // console.log(response.data);
+        setCategory('');
+        setDescription('');
+        setImage('');
+        setIsActive(false);
+        if (response.success) {
+          toast.success(response.message);
+          window.location = '/shopmanage';
+        } else {
+          toast.error(response.message);
+        }
+      })
+
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   return (
     <div>
       <button
@@ -46,60 +101,82 @@ export default function AddCategory() {
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                  <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                    <div className="sm:flex sm:items-start">
-                      <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                        <div className="mt-0">
-                          <div class="relative py-3 sm:max-w-xl sm:mx-auto">
-                            <div class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
-                              <div class="max-w-md mx-auto">
-                                <div class="flex items-center space-x-5">
-                                  <div class="h-14 w-14 bg-yellow-200 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono">
-                                    i
-                                  </div>
-                                  <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
-                                    <h2 class="leading-relaxed">
-                                      Create Category for Virtual Museum Shop
-                                    </h2>
-                                    <p class="text-sm text-gray-500 font-normal leading-relaxed">
-                                      Add Souvenir Category for the Virtual
-                                      Museum Shop
-                                    </p>
-                                  </div>
-                                </div>
-                                <div class="divide-y divide-gray-200">
-                                  <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                                    <div class="flex flex-col">
-                                      <label class="leading-loose">
-                                        Category Name
-                                      </label>
-                                      <input
-                                        type="text"
-                                        class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                        placeholder="Add Category
-             Title"
-                                      />
+                  <form onSubmit={handleSubmit}>
+                    <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                      <div className="sm:flex sm:items-start">
+                        <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                          <div className="mt-0">
+                            <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+                              <div class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+                                <div class="max-w-md mx-auto">
+                                  <div class="flex items-center space-x-5">
+                                    <div class="h-14 w-14 bg-yellow-200 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono">
+                                      i
                                     </div>
+                                    <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
+                                      <h2 class="leading-relaxed">
+                                        Create Category for Virtual Museum Shop
+                                      </h2>
+                                      <p class="text-sm text-gray-500 font-normal leading-relaxed">
+                                        Add Souvenir Category for the Virtual
+                                        Museum Shop
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <div class="divide-y divide-gray-200">
+                                    <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                                      <div class="flex flex-col">
+                                        <label class="leading-loose">
+                                          Category Name
+                                        </label>
+                                        <input
+                                          type="text"
+                                          class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                          placeholder="Add Category Title"
+                                          value={category}
+                                          onChange={(e) =>
+                                            setCategory(e.target.value)
+                                          }
+                                        />
+                                      </div>
+                                      <div class="flex flex-col">
+                                        {file && (
+                                          <img
+                                            className="img-fluid rounded"
+                                            src={URL.createObjectURL(file)}
+                                            alt=""
+                                          />
+                                        )}
+                                      </div>
 
-                                    <div class="flex flex-col">
-                                      <label class="leading-loose">
-                                        Category Image
-                                      </label>
-                                      <input
-                                        type="file"
-                                        class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                        placeholder="Add Category"
-                                      />
-                                    </div>
-                                    <div class="flex flex-col">
-                                      <label class="leading-loose">
-                                        Category Description
-                                      </label>
-                                      <textarea
-                                        id="message"
-                                        rows="4"
-                                        class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                      ></textarea>
+                                      <div class="flex flex-col">
+                                        <label class="leading-loose">
+                                          Category Image
+                                        </label>
+                                        <input
+                                          type="file"
+                                          class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                          placeholder="Add Category"
+                                          onChange={(e) =>
+                                            setFile(e.target.files[0])
+                                          }
+                                        />
+                                      </div>
+                                      <div class="flex flex-col">
+                                        <label class="leading-loose">
+                                          Category Description
+                                        </label>
+                                        <textarea
+                                          id="description"
+                                          name="description"
+                                          value={description}
+                                          onChange={(e) =>
+                                            setDescription(e.target.value)
+                                          }
+                                          rows="4"
+                                          class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                        ></textarea>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -109,24 +186,24 @@ export default function AddCategory() {
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                    <button
-                      type="button"
-                      className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                      onClick={() => setOpen(false)}
-                    >
-                      Add
-                    </button>
-                    <button
-                      type="button"
-                      className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                      onClick={() => setOpen(false)}
-                      ref={cancelButtonRef}
-                    >
-                      Cancel
-                    </button>
-                  </div>
+                    <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                      <button
+                        type="submit"
+                        onClick={handleSubmit}
+                        className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                      >
+                        Add
+                      </button>
+                      <button
+                        type="button"
+                        className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                        onClick={() => setOpen(false)}
+                        ref={cancelButtonRef}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
