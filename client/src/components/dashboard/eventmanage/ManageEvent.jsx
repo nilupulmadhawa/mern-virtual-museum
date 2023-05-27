@@ -58,6 +58,10 @@ export default function ManageEvent() {
                 <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
                   Event Title
                 </th>
+              
+                <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
+                  Event Image
+                </th>
                 <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
                   Event Subtitle
                 </th>
@@ -65,7 +69,7 @@ export default function ManageEvent() {
                   Start Date
                 </th>
                 <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
-                  End Date
+                  Time
                 </th>
                 <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
                   Event Category
@@ -93,6 +97,13 @@ export default function ManageEvent() {
                   <div class="text-sm leading-5 text-blue-900">
                     Explore British Museum
                   </div>
+                </td>
+                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+                  <img
+                    class="rounded-lg"
+                    src="https://images.pexels.com/photos/460736/pexels-photo-460736.jpeg?cs=srgb&dl=pexels-pixabay-460736.jpg&fm=jpg"
+                    alt="image description"
+                  />
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
                   Join with us
@@ -181,9 +192,17 @@ export default function ManageEvent() {
                     Egyptian history
                   </div>
                 </td>
+                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+                  <img
+                    class="rounded-lg"
+                    src="https://images.pexels.com/photos/460736/pexels-photo-460736.jpeg?cs=srgb&dl=pexels-pixabay-460736.jpg&fm=jpg"
+                    alt="image description"
+                  />
+                </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
                   Join with us
                 </td>
+               
                 <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
                   08-05-2023
                 </td>
@@ -267,6 +286,13 @@ export default function ManageEvent() {
                   <div class="text-sm leading-5 text-blue-900">
                     Explore British Museum
                   </div>
+                </td>
+                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+                  <img
+                    class="rounded-lg"
+                    src="https://images.pexels.com/photos/460736/pexels-photo-460736.jpeg?cs=srgb&dl=pexels-pixabay-460736.jpg&fm=jpg"
+                    alt="image description"
+                  />
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
                   Join with us
@@ -354,7 +380,15 @@ export default function ManageEvent() {
                   <div class="text-sm leading-5 text-blue-900">
                     Explore British Museum
                   </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+                  <img
+                    class="rounded-lg"
+                    src="https://images.pexels.com/photos/460736/pexels-photo-460736.jpeg?cs=srgb&dl=pexels-pixabay-460736.jpg&fm=jpg"
+                    alt="image description"
+                  />
                 </td>
+               
                 <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
                   Join with us
                 </td>
@@ -441,6 +475,13 @@ export default function ManageEvent() {
                   <div class="text-sm leading-5 text-blue-900">
                     Explore British Museum
                   </div>
+                </td>
+                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+                  <img
+                    class="rounded-lg"
+                    src="https://images.pexels.com/photos/460736/pexels-photo-460736.jpeg?cs=srgb&dl=pexels-pixabay-460736.jpg&fm=jpg"
+                    alt="image description"
+                  />
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
                   Join with us
