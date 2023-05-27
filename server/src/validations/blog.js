@@ -1,13 +1,13 @@
 import { Joi } from 'celebrate';
 
 export const addBlogSchema = Joi.object({
-  blog: Joi.string().required(),
-  description: Joi.string().required(),
+  blog: Joi.string(),
+  description: Joi.string(),
   image: Joi.string(),
   author_name: Joi.string(),
   date: Joi.string(),
   author_image: Joi.string(),
-  is_active: Joi.boolean().required(),
+  is_active: Joi.boolean(),
 });
 
 export const blogViewSchema = {

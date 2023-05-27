@@ -1,12 +1,88 @@
 import React from 'react';
 import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import { toast } from 'react-toastify';
+import { storage } from '../../../services/firebase'
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import { useStateContext } from '../../../context/ContextProvider';
+import { editBlog } from '../../../services/blog';
 
-export default function EditBlog() {
+export default function EditBlog({ row, getTableData }) {
   const [open, setOpen] = useState(false);
+  const [form, setForm] = useState(row);
+  const [file, setFile] = useState(null)
+  const { setLoading } = useStateContext();
 
   const cancelButtonRef = useRef(null);
+
+  const _editBlog = async (e) => {
+      e.preventDefault();
+      setLoading(true);
+      if (file == null) {
+        editBlog(form._id, form).then((res) => {
+              setLoading(false);
+              if (res.success) {
+                  getTableData()
+                  toast.success(res.message);
+                  _modalClose();
+              } else {
+                  toast.error(res.message);
+              }
+          })
+          return;
+      }
+      if ("jpg|jpeg|png|svg".indexOf(file.type.split("/")[1]) == -1) {
+          toast.error("Please select a valid image file");
+          return;
+      }
+
+      const name = new Date().getTime() + file.name;
+      const storageRef = ref(storage, name);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      await uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+              const progress =
+                  (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              // console.log("Upload is " + progress + "% done");
+              switch (snapshot.state) {
+                  case "paused":
+                      // console.log("Upload is paused");
+                      break;
+                  case "running":
+                      // console.log("Upload is running");
+                      break;
+                  default:
+                      break;
+              }
+          },
+          (error) => {
+              console.log(error);
+          },
+          () => {
+              getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+                  editBlog(form._id, { ...form, image: downloadURL }).then((res) => {
+                      setLoading(false);
+                      if (res.success) {
+                          getTableData()
+                          toast.success(res.message);
+                          _modalClose();
+                      } else {
+                          toast.error(res.message);
+                      }
+                  })
+
+
+              });
+          }
+      );
+  };
+
+  const _modalClose = async () => {
+      setOpen(false)
+  }
   return (
     <div>
       <div
@@ -58,6 +134,7 @@ export default function EditBlog() {
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <form onSubmit={_editBlog}>
                   <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                     <div className="sm:flex sm:items-start">
                       <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
@@ -80,90 +157,121 @@ export default function EditBlog() {
                                   </div>
                                 </div>
                                 <div class="divide-y divide-gray-200">
-                                  <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                                    <div class="flex flex-col">
-                                      <label class="leading-loose">
-                                        Blog Title
-                                      </label>
-                                      <input
-                                        type="text"
-                                        value={
-                                          'Read the most interesting Blogs'
-                                        }
-                                        class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                        placeholder="Edit Blog
-             Title"
-                                      />
-                                    </div>
+                                                                        <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                                                                            <div class="flex flex-col">
+                                                                                <label class="leading-loose">
+                                                                                    Blog Title
+                                                                                </label>
+                                                                                <input
+                                                                                    type="text"
+                                                                                    required
+                                                                                    class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                                                                    placeholder="Add Blog Title"
+                                                                                    name='title'
+                                                                                    onChange={(e) => setForm({ ...form, blog: e.target.value })}
+                                                                                    value={form.blog}
+                                                                                />
+                                                                            </div>
 
-                                    <div class="flex flex-col">
-                                      <label class="leading-loose">
-                                        Blog Image
-                                      </label>
-                                      <input
-                                        type="file"
-                                        class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                        placeholder="Edit Category"
-                                      />
-                                    </div>
-                                    <div class="flex flex-col">
-                                      <label class="leading-loose">
-                                        Blog Description
-                                      </label>
-                                      <input
-                                        type="text"
-                                        value={
-                                          'Beyond the Museums exhibitions lies a labyrinth of hallways, vast storage roomsand busy offices, all filled with the sights and sounds of discovery.'
-                                        }
-                                        class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                        placeholder="Edit Description"
-                                      />
-                                    </div>
-                                    <div class="flex flex-col">
-                                      <label class="leading-loose">
-                                        Blog Paragraph
-                                      </label>
-                                      <textarea
-                                        id="message"
-                                        rows="4"
-                                        value={
-                                          'Over the past three centuries, people have collected objects and specimens and placed them in natural history museums throughout the world. Taken as a whole, this global collection is the physical basis for our understanding of the natural world and our place in it, an unparalleled source of information that is directly relevant to issues as diverse as wildlife conservation, climate change, pandemic preparedness, food security, invasive species, rare minerals, and the bioeconomy (1). Strategic coordination and use of the global collection has the potential to focus future collecting and guide decisions that are relevant to the future of humanity and biodiversity. To begin to map the aggregate holdings of the global collection, we describe here a simple and fast method to assess the contents of any natural history museum, and report results based on our assessment of 73 of the world’s largest natural history museums and herbaria from 28 countries.Today, more than a thousand natural history museums exist, with the largest ones located in Europe and North America.'
-                                        }
-                                        class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                      ></textarea>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                                                                            <div class="flex flex-col">
+                                                                                <label class="leading-loose">
+                                                                                    Blog Image
+                                                                                </label>
+                                                                                <input
+                                                                                    type="file"
+                                                                                    class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                                                                    placeholder="Thumbnail Image"
+                                                                                    onChange={(e) => setFile(e.target.files[0])}
+                                                                                />
+                                                                            </div>
+                                                                            <div class="flex flex-row mr-3 ">
+                                                                                <div class="flex flex-col">
+                                                                                    <label class="leading-loose">
+                                                                                        Description
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        required
+                                                                                        class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                                                                        placeholder="Add Description"
+                                                                                        name='description'
+                                                                                        onChange={(e) => setForm({ ...form, description: e.target.value })}
+                                                                                        value={form.description}
+                                                                                    />
+                                                                                </div>
+                                                                                <div class="flex flex-col ml-3">
+                                                                                    <label class="leading-loose">
+                                                                                        Author Name
+                                                                                    </label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        required
+                                                                                        class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                                                                        placeholder="Add Author Name"
+                                                                                        name='autherName'
+                                                                                        onChange={(e) => setForm({ ...form, author_name: e.target.value })}
+                                                                                        value={form.author_name}
+                                                                                    />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="flex flex-col">
+                                                                                <label class="leading-loose">
+                                                                                    Author Image
+                                                                                </label>
+                                                                                <input
+                                                                                    type="file"
+                                                                                    class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                                                                    placeholder="Thumbnail Image"
+                                                                                    onChange={(e) => setFile(e.target.files[0])}
+                                                                                />
+                                                                            </div>
+                                                                            <div class="flex flex-col">
+                                                                                <label class="leading-loose">
+                                                                                    Date
+                                                                                </label>
+                                                                                <textarea
+                                                                                    required
+                                                                                    rows="4"
+                                                                                    class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                                                                    placeholder="Add date"
+                                                                                    name='date'
+                                                                                    onChange={(e) => setForm({ ...form, date: e.target.value })}
+                                                                                    value={form.date}
+                                                                                ></textarea>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                                            <button
+                                                type="submit"
+                                                className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-800 sm:ml-3 sm:w-auto"
+                                                ref={cancelButtonRef}
+                                            >
+                                                Update
+                                            </button>
+                                            <button
+                                                type="button"
+                                                className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                                                onClick={() => setOpen(false)}
+                                            >
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+                                </Dialog.Panel>
+                            </Transition.Child>
                         </div>
-                      </div>
                     </div>
-                  </div>
-                  <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                    <button
-                      type="button"
-                      className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                      onClick={() => setOpen(false)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      type="button"
-                      className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                      onClick={() => setOpen(false)}
-                      ref={cancelButtonRef}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition.Root>
-    </div>
-  );
+                </Dialog>
+            </Transition.Root>
+        </div>
+    );
 }

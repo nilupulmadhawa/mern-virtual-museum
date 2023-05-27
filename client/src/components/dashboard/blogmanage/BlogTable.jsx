@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AddBlog from './AddBlog';
 import EditBlog from './EditBlog';
+import { getAllBlogs } from '../../../services/blog';
+import DeleteBlog from './DeleteBlog';
 
 export default function BlogTable() {
+  const [open, setOpen] = useState(false);
+    const [table, setTable] = useState([]);
+
+  const _getTableData = () => {
+    getAllBlogs().then((res) => {
+        setTable(res.data);
+    });
+}
+
+useEffect(() => {
+    _getTableData()
+}, [])
+
   return (
     <div>
       <h2 className="mb-10 mt-10 text-2xl font-semibold leading-tight">
@@ -61,307 +76,90 @@ export default function BlogTable() {
                   Title
                 </th>
                 <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
-                  Image
+                  Blog Image
                 </th>
 
                 <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
                   Description
                 </th>
                 <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
-                  Paragraph
+                  Author Name
                 </th>
                 {/* <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Actions</th> */}
+                
+
                 <th class="py-3 px-12  border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
-                  Actions
+                  Date
                 </th>
                 {/* <th class="px-6 py-3 border-b-2 border-gray-300"></th> */}
               </tr>
             </thead>
-            <tbody class="bg-white">
-              <tr>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div class="flex items-center">
-                    <div>
-                      <div class="text-sm leading-5 text-gray-800">#B001</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div class="text-sm leading-5 text-blue-900">
-                    Read the most interesting Blogs
-                  </div>
-                </td>
+            <tbody className="bg-white">
 
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  <img
-                    class="rounded-lg"
-                    src="https://images.pexels.com/photos/460736/pexels-photo-460736.jpeg?cs=srgb&dl=pexels-pixabay-460736.jpg&fm=jpg"
-                    alt="image description"
-                  />
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  Beyond the Museums exhibitions lies a labyrinth of hallways,
-                  vast storage roomsand busy offices, all filled with the sights
-                  and sounds of discovery.
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  Over the past three centuries, people have collected objects
-                  and specimens and placed them in natural history museums
-                  throughout the world. Taken as a whole, this global collection
-                  is the physical basis for our understanding of the natural
-                  world and our place in it, an unparalleled source of
-                  information that is directly relevant to issues as diverse as
-                  wildlife conservation, climate change, pandemic preparedness,
-                  food security, invasive species, rare minerals, and the
-                  bioeconomy (1). Strategic coordination and use of the global
-                  collection has the potential to focus future collecting and
-                  guide decisions that are relevant to the future of humanity
-                  and biodiversity. To begin to map the aggregate holdings of
-                  the global collection, we describe here a simple and fast
-                  method to assess the contents of any natural history museum,
-                  and report results based on our assessment of 73 of the
-                  world’s largest natural history museums and herbaria from 28
-                  countries.Today, more than a thousand natural history museums
-                  exist, with the largest ones located in Europe and North
-                  America.
-                </td>
+                            {
+                                table?.map((row, index) => (
+                                    <tr>
+                                        <td className="px-3 text-center  py-4 whitespace-no-wrap border-b border-gray-500">
+                                            <div className="flex items-center">
+                                                <div>
+                                                    <div className="text-sm leading-5 text-gray-800">#{index + 1}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="px-3 text-center  py-4 whitespace-no-wrap border-b border-gray-500">
+                                            <div className="text-sm leading-5 text-blue-900">{row.blog}</div>
+                                        </td>
+                                        
 
-                <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
-                  <td class="py-3 px-6 text-center">
-                    <div class="flex item-center justify-center">
-                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                          />
-                        </svg>
-                      </div>
-                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                          />
-                        </svg>
-                      </div>
-                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </td>
-                </td>
-              </tr>
-              <tr>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div class="flex items-center">
-                    <div>
-                      <div class="text-sm leading-5 text-gray-800">#B002</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div class="text-sm leading-5 text-blue-900">
-                    Read the most interesting Blogs
-                  </div>
-                </td>
+                                        <td className="px-3 text-center  py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5 flex item-center justify-center">
+                                            <img
+                                                className="rounded-lg w-20 h-20 object-cover"
+                                                src={row.image}
+                                                alt="image description"
+                                            />{' '}
+                                        </td>
+                                        <td className="px-3 text-center  py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+                                            {row.description}
+                                        </td>
+                                        <td className="px-3 text-center  py-4 whitespace-no-wrap border-b border-gray-500">
+                                            <div className="text-sm leading-5 text-blue-900">{row.author_name}</div>
+                                        </td>
+                                        
+                                        <td className="px-3 text-center  py-4 whitespace-no-wrap border-b border-gray-500">
+                                            <div className="text-sm leading-5 text-blue-900">{row.date}</div>
+                                        </td>
+                                        <td className="px-3 text-center  py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
+                                            <div className="flex item-center justify-center">
+                                                <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke="currentColor"
+                                                    >
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                                        />
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                                        />
+                                                    </svg>
+                                                </div>
+                                                <EditBlog row={row} getTableData={_getTableData} />
+                                                <DeleteBlog row={row} getTableData={_getTableData} />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
 
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  <img
-                    class="rounded-lg"
-                    src="https://images.pexels.com/photos/460736/pexels-photo-460736.jpeg?cs=srgb&dl=pexels-pixabay-460736.jpg&fm=jpg"
-                    alt="image description"
-                  />
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  Beyond the Museums exhibitions lies a labyrinth of hallways,
-                  vast storage roomsand busy offices, all filled with the sights
-                  and sounds of discovery.
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  Over the past three centuries, people have collected objects
-                  and specimens and placed them in natural history museums
-                  throughout the world. Taken as a whole, this global collection
-                  is the physical basis for our understanding of the natural
-                  world and our place in it, an unparalleled source of
-                  information that is directly relevant to issues as diverse as
-                  wildlife conservation, climate change, pandemic preparedness,
-                  food security, invasive species, rare minerals, and the
-                  bioeconomy (1). Strategic coordination and use of the global
-                  collection has the potential to focus future collecting and
-                  guide decisions that are relevant to the future of humanity
-                  and biodiversity. To begin to map the aggregate holdings of
-                  the global collection, we describe here a simple and fast
-                  method to assess the contents of any natural history museum,
-                  and report results based on our assessment of 73 of the
-                  world’s largest natural history museums and herbaria from 28
-                  countries.Today, more than a thousand natural history museums
-                  exist, with the largest ones located in Europe and North
-                  America.
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
-                  <td class="py-3 px-6 text-center">
-                    <div class="flex item-center justify-center">
-                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                          />
-                        </svg>
-                      </div>
-                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                          />
-                        </svg>
-                      </div>
-                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </td>
-                </td>
-              </tr>
-              <tr>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div class="flex items-center">
-                    <div>
-                      <div class="text-sm leading-5 text-gray-800">#B003</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                  <div class="text-sm leading-5 text-blue-900">
-                    Read the most interesting Blogs
-                  </div>
-                </td>
-
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  <img
-                    class="rounded-lg"
-                    src="https://images.pexels.com/photos/460736/pexels-photo-460736.jpeg?cs=srgb&dl=pexels-pixabay-460736.jpg&fm=jpg"
-                    alt="image description"
-                  />
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                  
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
-                  <td class="py-3 px-6 text-center">
-                    <div class="flex item-center justify-center">
-                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                          />
-                        </svg>
-                      </div>
-                      {/* /// */}
-                      <EditBlog />
-                      <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </td>
-                </td>
-              </tr>
-            </tbody>
+                            }
+                        </tbody>
           </table>
         </div>
       </div>
