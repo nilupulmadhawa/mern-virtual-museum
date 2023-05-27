@@ -30,115 +30,111 @@ import Museum from './components/Museum';
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <DefaultLayout />,
-        children: [
-            {
-                path: '/',
-                element: <Home />,
-            },
-            {
-                path: '/about',
-                element: <AboutUs />,
-            },
-            {
-                path: '/shopcategory',
-                element: <ShopCategory />,
-            },
-            {
-                path: '/shopviewmagnet',
-                element: <ShopViewMagnet />,
-            },
-            {
-                path: '/shopviewcards',
-                element: <ShopViewCards />,
-            },
-            {
-                path: '/shopviewaccessories',
-                element: <ShopViewAccessories />,
-            },
-            {
-                path: '/singleitemview',
-                element: <SingleItemView />,
-            },
-
-            {
-                path: '/eventDetails',
-                element: <EventDetails />,
-            },
-            {
-                path: '/newEvents/:id',
-                element: <NewEvents />,
-            },
-            {
-                path: '/blogsview',
-                element: <BlogsView />,
-            },
-            {
-                path: '/blogview',
-                element: <BlogView />,
-            },
-            {
-                path: '/articlesview',
-                element: <ArticlesView />,
-            },
-
-            {
-                path: '/museumlist',
-                element: <MuseumList />,
-            },
-            {
-                path: '/login',
-                element: <Login />,
-            },
-        ],
+        element: <Home />,
     },
     {
-        path: '/museum/:id',
+        path: '/about',
+        element: <AboutUs />,
+    },
+    {
+        path: '/shopcategory',
+        element: <ShopCategory />,
+    },
+    {
+        path: '/shopview/:cat',
+        element: <ShopViewMagnet />,
+    },
+    {
+        path: '/shopviewcards',
+        element: <ShopViewCards />,
+    },
+    {
+        path: '/shopviewaccessories',
+        element: <ShopViewAccessories />,
+    },
+    {
+        path: '/singleitemview',
+        element: <SingleItemView />,
+    },
+
+    {
+        path: '/eventDetails',
+        element: <EventDetails />,
+    },
+    {
+        path: '/newEvents/:id',
+        element: <NewEvents />,
+    },
+    {
+        path: '/blogsview',
+        element: <BlogsView />,
+    },
+    {
+        path: '/blogview',
+        element: <BlogView />,
+    },
+    {
+        path: '/articlesview',
+        element: <ArticlesView />,
+    },
+
+    {
+        path: '/museumlist',
+        element: <MuseumList />,
+    },
+    {
+        path: '/login',
+        element: <Login />,
+    },
+],
+    },
+{
+    path: '/museum/:id',
         element: <Museum />,
     },
 
-    {
-        path: '/',
+{
+    path: '/',
         element: <GuestLayout />,
-        children: [
-            {
-                path: '/signup',
-                element: <Signup />,
-            },
-            {
-                path: '/aa',
-                element: <NotFound />,
-            },
-        ],
+            children: [
+                {
+                    path: '/signup',
+                    element: <Signup />,
+                },
+                {
+                    path: '/aa',
+                    element: <NotFound />,
+                },
+            ],
     },
-    {
-        path: '/',
+{
+    path: '/',
         element: <DashboardLayout />,
-        children: [
-            {
-                path: '/dashboard',
-                element: <AdminDashboard />,
-            },
-            {
-                path: '/museummanage',
-                element: <MuseumDetailsTable />,
-            },
-            {
-                path: '/blogmanage',
-                element: <BlogMainPage />,
-            },
-            {
-                path: '/eventsmanage',
-                element: <ManageEvent />,
-            },
-            {
-                path: '/shopmanage',
-                element: <ShopMainPage />,
-            },
-        ],
+            children: [
+                {
+                    path: '/dashboard',
+                    element: <AdminDashboard />,
+                },
+                {
+                    path: '/museummanage',
+                    element: <MuseumDetailsTable />,
+                },
+                {
+                    path: '/blogmanage',
+                    element: <BlogMainPage />,
+                },
+                {
+                    path: '/eventsmanage',
+                    element: <ManageEvent />,
+                },
+                {
+                    path: '/shopmanage',
+                    element: <ShopMainPage />,
+                },
+            ],
     },
-    {
-        path: '*',
+{
+    path: '*',
         element: <NotFound />,
     },
 ]);

@@ -1,66 +1,77 @@
 import React from 'react';
 import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import axios from 'axios';
+import { useStateContext } from '../../../context/ContextProvider';
 import { toast } from 'react-toastify';
+import { storage } from '../../../services/firebase';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { addCategory } from '../../../services/category';
 
-export default function AddCategory() {
+export default function AddCategory({ getTableData }) {
   const [open, setOpen] = useState(false);
+  const [file, setFile] = useState(null);
+  const [form, setForm] = useState({});
+  const { setLoading } = useStateContext();
+
+  const _addCategory = async (e) => {
+    e.preventDefault();
+    if (file == null) {
+      toast.error('Please select a file to upload');
+      return;
+    }
+    if ('jpg|jpeg|png|svg|wepg'.indexOf(file.type.split('/')[1]) == -1) {
+      toast.error('Please select a valid image file');
+      return;
+    }
+    setLoading(true);
+    const name = new Date().getTime() + file.name;
+    const storageRef = ref(storage, name);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    await uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        // console.log("Upload is " + progress + "% done");
+        switch (snapshot.state) {
+          case 'paused':
+            // console.log("Upload is paused");
+            break;
+          case 'running':
+            // console.log("Upload is running");
+            break;
+          default:
+            break;
+        }
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+          addCategory({ ...form, image: downloadURL }).then((res) => {
+            setLoading(false);
+            if (res.success) {
+              toast.success(res.message);
+              getTableData();
+              _modalClose();
+            } else {
+              toast.error(res.message);
+            }
+          });
+        });
+      }
+    );
+  };
+
+  const _modalClose = async () => {
+    setOpen(false);
+    setForm({});
+    setFile(null);
+  };
 
   const cancelButtonRef = useRef(null);
-
-  const [category, setCategory] = useState('');
-  const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
-  const [is_active, setIsActive] = useState(false);
-
-  const [file, setFile] = useState(null);
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    const data = new FormData();
-    const filename = Date.now() + file.name;
-    data.append('name', filename);
-    data.append('file', file);
-    data.image = filename;
-
-    try {
-      await axios.post('http://localhost:5000/api/upload', data);
-    } catch (err) {
-      alert(err);
-    }
-
-    const catdata = {
-      category,
-      description,
-      image: data.image,
-      is_active: true,
-    };
-    console.log(catdata);
-
-    axios
-      .post('http://localhost:5000/api/category/', catdata)
-
-      .then(function (response) {
-        console.log('1111');
-        // console.log(response.data);
-        setCategory('');
-        setDescription('');
-        setImage('');
-        setIsActive(false);
-        if (response.success) {
-          toast.success(response.message);
-          window.location = '/shopmanage';
-        } else {
-          toast.error(response.message);
-        }
-      })
-
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
 
   return (
     <div>
@@ -75,7 +86,7 @@ export default function AddCategory() {
           as="div"
           className="relative z-10"
           initialFocus={cancelButtonRef}
-          onClose={setOpen}
+          onClose={() => _modalClose()}
         >
           <Transition.Child
             as={Fragment}
@@ -101,7 +112,7 @@ export default function AddCategory() {
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={_addCategory}>
                     <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                       <div className="sm:flex sm:items-start">
                         <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
@@ -133,9 +144,12 @@ export default function AddCategory() {
                                           type="text"
                                           class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                           placeholder="Add Category Title"
-                                          value={category}
+                                          value={form.category}
                                           onChange={(e) =>
-                                            setCategory(e.target.value)
+                                            setForm({
+                                              ...form,
+                                              category: e.target.value,
+                                            })
                                           }
                                         />
                                       </div>
@@ -169,9 +183,12 @@ export default function AddCategory() {
                                         <textarea
                                           id="description"
                                           name="description"
-                                          value={description}
+                                          value={form.description}
                                           onChange={(e) =>
-                                            setDescription(e.target.value)
+                                            setForm({
+                                              ...form,
+                                              description: e.target.value,
+                                            })
                                           }
                                           rows="4"
                                           class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
@@ -189,7 +206,7 @@ export default function AddCategory() {
                     <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                       <button
                         type="submit"
-                        onClick={handleSubmit}
+                        ref={cancelButtonRef}
                         className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
                       >
                         Add

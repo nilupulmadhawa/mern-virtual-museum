@@ -4,14 +4,15 @@ export const addCategorySchema = Joi.object({
   category: Joi.string().required(),
   description: Joi.string().required(),
   image: Joi.string(),
-  is_active: Joi.boolean().required(),
+  is_active: Joi.boolean(),
 });
 
 export const categoryViewSchema = {
   filter: Joi.object()
     .keys({
-      created_at: Joi.string().hex().length(24).optional(),
-      updated_at: Joi.string().hex().length(24).optional(),
+      category: Joi.string().optional(),
+      created_at: Joi.string().optional(),
+      updated_at: Joi.string().optional(),
     })
     .optional(),
   sort: Joi.object()

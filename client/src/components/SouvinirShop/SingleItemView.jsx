@@ -75,7 +75,7 @@ function classNames(...classes) {
 }
 
 export default function SingleItemView() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="bg-white">
@@ -120,7 +120,10 @@ export default function SingleItemView() {
         </nav>
 
         {/* Image gallery */}
-        <div className="mx-auto mt-20 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8" style={{marginTop:'200px', marginBottom:'200px'}}>
+        <div
+          className="mx-auto mt-20 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8"
+          style={{ marginTop: '200px', marginBottom: '200px' }}
+        >
           <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
             <img
               src={product.images[0].src}
@@ -248,7 +251,10 @@ export default function SingleItemView() {
                   leaveFrom="translate-x-0"
                   leaveTo="translate-x-full"
                 >
-                  <Dialog.Panel className="pointer-events-auto w-screen max-w-md" style={{marginTop:'140px'}}>
+                  <Dialog.Panel
+                    className="pointer-events-auto w-screen max-w-md"
+                    style={{ marginTop: '140px' }}
+                  >
                     <div className="flex h-medium flex-col overflow-y-scroll bg-white shadow-xl mt-30">
                       <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                         <div className="flex items-start justify-between">

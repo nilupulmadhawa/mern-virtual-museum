@@ -1,89 +1,95 @@
 import React, { useEffect } from 'react';
 import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import axios from 'axios';
 import { toast } from 'react-toastify';
+import { storage } from '../../../services/firebase';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { useStateContext } from '../../../context/ContextProvider';
+import { editProduct } from '../../../services/product';
+import { getAllCategorys } from '../../../services/category';
 
-export default function EditProduct(props) {
+export default function EditProduct({ row, getTableData }) {
   const [open, setOpen] = useState(false);
+  const [form, setForm] = useState(row);
+  const [file, setFile] = useState(null);
+  const { setLoading } = useStateContext();
+  const [category, setCategory] = useState([]);
 
   const cancelButtonRef = useRef(null);
 
-  const [category, setCategory] = useState('');
-  const [product, setProduct] = useState('');
-  const [image, setImage] = useState('');
-  const [price, setPrice] = useState('');
-  const [is_active, setIsActive] = useState(false);
+  const _editProduct = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    if (file == null) {
+      editProduct(form._id, form).then((res) => {
+        setLoading(false);
+        if (res.success) {
+          getTableData();
+          toast.success(res.message);
+          _modalClose();
+        } else {
+          toast.error(res.message);
+        }
+      });
+      return;
+    }
+    if ('jpg|jpeg|png|svg'.indexOf(file.type.split('/')[1]) == -1) {
+      toast.error('Please select a valid image file');
+      return;
+    }
 
-  const [file, setFile] = useState(null);
+    const name = new Date().getTime() + file.name;
+    const storageRef = ref(storage, name);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    await uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        // console.log("Upload is " + progress + "% done");
+        switch (snapshot.state) {
+          case 'paused':
+            // console.log("Upload is paused");
+            break;
+          case 'running':
+            // console.log("Upload is running");
+            break;
+          default:
+            break;
+        }
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+          editProduct(form._id, { ...form, image: downloadURL }).then((res) => {
+            setLoading(false);
+            if (res.success) {
+              getTableData();
+              toast.success(res.message);
+              _modalClose();
+            } else {
+              toast.error(res.message);
+            }
+          });
+        });
+      }
+    );
+  };
+
+  const _modalClose = async () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
-    if (props.category) {
-      setCategory(props.category);
-    }
-    if (props.product) {
-      setProduct(props.product);
-    }
-    if (props.image) {
-      setImage(props.image);
-    }
-    if (props.price) {
-      setPrice(props.price);
-    }
-  }, [props.category, props.product, props.price, props.id, props.image]);
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    const data = {
-      category,
-      product,
-      price,
-      image,
-      is_active: true,
-    };
-    console.log(data);
-
-    if (file) {
-      const formData = new FormData();
-      const filename = Date.now() + file.name;
-      formData.append('name', filename);
-      formData.append('file', file);
-
-      try {
-        await axios.post('http://localhost:5000/api/upload', formData);
-        data.image = filename;
-      } catch (err) {
-        alert(err);
-        return;
+    getAllCategorys().then((res) => {
+      if (res.success) {
+        setCategory(res.data);
       }
-    }
-    submitForm(data);
-  }
-
-  async function submitForm(data) {
-    try {
-      const response = await axios.patch(
-        `http://localhost:5000/api/product/${props.id}`,
-        data
-      );
-      console.log(response.data);
-      setCategory('');
-      setPrice('');
-      setProduct('');
-      setImage('');
-      setIsActive(false);
-
-      if (response.data.success) {
-        toast.success(response.message);
-        window.location = '/shopmanage';
-      } else {
-        toast.error(response.message);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+    });
+  }, []);
 
   return (
     <div>
@@ -136,7 +142,7 @@ export default function EditProduct(props) {
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={_editProduct}>
                     <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                       <div className="sm:flex sm:items-start">
                         <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
@@ -166,9 +172,12 @@ export default function EditProduct(props) {
                                         </label>
                                         <input
                                           type="text"
-                                          value={product}
+                                          value={form.product}
                                           onChange={(e) =>
-                                            setProduct(e.target.value)
+                                            setForm({
+                                              ...form,
+                                              product: e.target.value,
+                                            })
                                           }
                                           class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                           placeholder="Add Product
@@ -179,16 +188,39 @@ export default function EditProduct(props) {
                                         <label class="leading-loose">
                                           Product Category
                                         </label>
-                                        <input
-                                          type="text"
-                                          value={category}
+                                        <select
+                                          id="countries"
+                                          value={form.category}
                                           onChange={(e) =>
-                                            setCategory(e.target.value)
+                                            setForm({
+                                              ...form,
+                                              category: e.target.value,
+                                            })
+                                          }
+                                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                                        >
+                                          <option selected>
+                                            Choose a countrie
+                                          </option>
+                                          {category?.map((item) => (
+                                            <option value={item.category}>
+                                              {item.category}
+                                            </option>
+                                          ))}
+                                        </select>
+                                        {/* <input
+                                          type="text"
+                                          value={form.category}
+                                          onChange={(e) =>
+                                            setForm({
+                                              ...form,
+                                              category: e.target.value,
+                                            })
                                           }
                                           class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                           placeholder="Add Product
              Title"
-                                        />
+                                        /> */}
                                       </div>
 
                                       <div class="flex flex-col">
@@ -210,7 +242,6 @@ export default function EditProduct(props) {
                                           onChange={(e) =>
                                             setFile(e.target.files[0])
                                           }
-                                          value={file}
                                           class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                           placeholder="Add Product"
                                         />
@@ -221,9 +252,12 @@ export default function EditProduct(props) {
                                         </label>
                                         <input
                                           type="text"
-                                          value={price}
+                                          value={form.price}
                                           onChange={(e) =>
-                                            setPrice(e.target.value)
+                                            setForm({
+                                              ...form,
+                                              price: e.target.value,
+                                            })
                                           }
                                           class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                           placeholder="Add Product"
@@ -242,7 +276,7 @@ export default function EditProduct(props) {
                       <button
                         type="submit"
                         className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                        onClick={() => setOpen(false)}
+                        ref={cancelButtonRef}
                       >
                         Edit Product
                       </button>

@@ -5,18 +5,20 @@ export const addProductSchema = Joi.object({
   category: Joi.string().required(),
   image: Joi.string(),
   price: Joi.string().required(),
-  is_active: Joi.boolean().required(),
+  is_active: Joi.boolean(),
 });
 
 export const productViewSchema = {
   filter: Joi.object()
     .keys({
-      created_at: Joi.string().hex().length(24).optional(),
-      updated_at: Joi.string().hex().length(24).optional(),
+      category: Joi.string().optional(),
+      created_at: Joi.string().optional(),
+      updated_at: Joi.string().optional(),
     })
     .optional(),
   sort: Joi.object()
     .keys({
+      category: Joi.string().optional(),
       created_at: Joi.any().valid('asc', 'desc', '1', '-1', 1, -1).optional(),
       updated_at: Joi.any().valid('asc', 'desc', '1', '-1', 1, -1).optional(),
     })

@@ -1,56 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import AddProduct from './AddProduct';
 import EditProduct from './EditProduct';
-import axios from 'axios';
+import { getAllProducts } from '../../../services/product';
+import DeleteProduct from './DeleteProduct';
 
 export default function ShopProductTable() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filteredData, setFilteredData] = useState([]);
-  const PF = 'http://localhost:5000/images/';
+  const [open, setOpen] = useState(false);
+  const [table, setTable] = useState([]);
 
-  const [data, setData] = useState([]);
-
-  const getdata = () => {
-    axios
-      .get('http://localhost:5000/api/product/')
-      .then((res) => {
-        setData(res.data.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const _getTableData = () => {
+    getAllProducts().then((res) => {
+      setTable(res.data);
+    });
   };
 
   useEffect(() => {
-    getdata();
+    _getTableData();
   }, []);
-
-  useEffect(() => {
-    setFilteredData(
-      data.filter((row) =>
-        row.category.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    );
-  }, [searchQuery, data]);
-
-  const handleDelete = (_id) => {
-    axios
-      .delete(`http://localhost:5000/api/product/${_id}`)
-      .then((res) => {
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   return (
     <div>
       <h2 className="mb-10 mt-10 text-2xl font-semibold leading-tight">
         Manage Shop Product Details
       </h2>
 
-      <AddProduct />
+      <AddProduct getTableData={_getTableData} />
 
       <div class="-my-2 py-2 mb-10 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">
         <div class="align-middle rounded-tl-lg rounded-tr-lg inline-block w-full py-4 overflow-hidden bg-white shadow-lg px-12">
@@ -84,8 +57,6 @@ export default function ShopProductTable() {
                 </div>
                 <input
                   type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
                   class="flex-shrink flex-grow flex-auto leading-normal tracking-wide w-px flex-1 border border-none border-l-0 rounded rounded-l-none px-3 relative focus:outline-none text-xxs lg:text-xs lg:text-base text-gray-500 font-thin"
                   placeholder="Search by category"
                 />
@@ -97,6 +68,9 @@ export default function ShopProductTable() {
           <table class="min-w-full">
             <thead>
               <tr>
+                <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
+                  ID
+                </th>
                 <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
                   Name
                 </th>
@@ -119,8 +93,17 @@ export default function ShopProductTable() {
               </tr>
             </thead>
             <tbody class="bg-white">
-              {filteredData.map((row) => (
-                <tr key={row.id}>
+              {table?.map((row, index) => (
+                <tr>
+                  <td className="px-3 text-center  py-4 whitespace-no-wrap border-b border-gray-500">
+                    <div className="flex items-center">
+                      <div>
+                        <div className="text-sm leading-5 text-gray-800">
+                          #{index + 1}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                   <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                     <div class="text-sm leading-5 text-blue-900">
                       {row.product}
@@ -135,7 +118,7 @@ export default function ShopProductTable() {
 
                   <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
                     <img
-                      src={PF + row.image}
+                      src={row.image}
                       class="img-fluid mb-5 img-thumbnail shadow-sm"
                       alt=""
                       style={{ width: '100px', height: '100px' }}
@@ -170,31 +153,8 @@ export default function ShopProductTable() {
                           </svg>
                         </div>
                         {/* //// */}
-                        <EditProduct
-                          id={row._id}
-                          category={row.category}
-                          product={row.product}
-                          image={row.image}
-                          price={row.price}
-                        />
-                        <div
-                          class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
-                          onClick={() => handleDelete(row._id)}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                            />
-                          </svg>
-                        </div>
+                        <EditProduct row={row} getTableData={_getTableData} />
+                        <DeleteProduct row={row} getTableData={_getTableData} />
                       </div>
                     </td>
                   </td>
