@@ -7,7 +7,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import { useStateContext } from '../../../context/ContextProvider';
 import { editMuseum } from '../../../services/museum';
 
-export default function EditMuseumModal({ row }) {
+export default function EditMuseumModal({ row, getTableData }) {
     const [open, setOpen] = useState(false);
     const [form, setForm] = useState(row);
     const [file, setFile] = useState(null)
@@ -22,6 +22,7 @@ export default function EditMuseumModal({ row }) {
             editMuseum(form._id, form).then((res) => {
                 setLoading(false);
                 if (res.success) {
+                    getTableData()
                     toast.success(res.message);
                     _modalClose();
                 } else {
@@ -64,6 +65,7 @@ export default function EditMuseumModal({ row }) {
                     editMuseum(form._id, { ...form, image: downloadURL }).then((res) => {
                         setLoading(false);
                         if (res.success) {
+                            getTableData()
                             toast.success(res.message);
                             _modalClose();
                         } else {
@@ -167,7 +169,7 @@ export default function EditMuseumModal({ row }) {
                                                                                     placeholder="Add Museum Title"
                                                                                     name='title'
                                                                                     onChange={(e) => setForm({ ...form, title: e.target.value })}
-                                                                                    vale={form.title}
+                                                                                    value={form.title}
                                                                                 />
                                                                             </div>
 
@@ -177,7 +179,6 @@ export default function EditMuseumModal({ row }) {
                                                                                 </label>
                                                                                 <input
                                                                                     type="file"
-                                                                                    required
                                                                                     class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                                                                     placeholder="Thumbnail Image"
                                                                                     onChange={(e) => setFile(e.target.files[0])}
@@ -195,7 +196,7 @@ export default function EditMuseumModal({ row }) {
                                                                                         placeholder="Latitude"
                                                                                         name='lat'
                                                                                         onChange={(e) => setForm({ ...form, lat: e.target.value })}
-                                                                                        vale={form.lat}
+                                                                                        value={form.lat}
                                                                                     />
                                                                                 </div>
                                                                                 <div class="flex flex-col ml-3">
@@ -209,7 +210,7 @@ export default function EditMuseumModal({ row }) {
                                                                                         placeholder="Longitude"
                                                                                         name='lng'
                                                                                         onChange={(e) => setForm({ ...form, lng: e.target.value })}
-                                                                                        vale={form.lng}
+                                                                                        value={form.lng}
                                                                                     />
                                                                                 </div>
                                                                             </div>
@@ -224,7 +225,7 @@ export default function EditMuseumModal({ row }) {
                                                                                     placeholder="Add Description"
                                                                                     name='description'
                                                                                     onChange={(e) => setForm({ ...form, description: e.target.value })}
-                                                                                    vale={form.description}
+                                                                                    value={form.description}
                                                                                 ></textarea>
                                                                             </div>
 
@@ -239,9 +240,9 @@ export default function EditMuseumModal({ row }) {
                                         </div>
                                         <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                                             <button
-                                                type="button"
-                                                className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                                                onClick={() => setOpen(false)}
+                                                type="submit"
+                                                className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-800 sm:ml-3 sm:w-auto"
+                                                ref={cancelButtonRef}
                                             >
                                                 Update
                                             </button>
@@ -249,7 +250,6 @@ export default function EditMuseumModal({ row }) {
                                                 type="button"
                                                 className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                                                 onClick={() => setOpen(false)}
-                                                ref={cancelButtonRef}
                                             >
                                                 Cancel
                                             </button>

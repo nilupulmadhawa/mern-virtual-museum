@@ -7,14 +7,14 @@ export default function MuseumDetailsTable() {
     const [open, setOpen] = useState(false);
     const [table, setTable] = useState([]);
 
-    const _setTableData = () => {
+    const _getTableData = () => {
         getAllMuseums().then((res) => {
             setTable(res.data);
         });
     }
 
     useEffect(() => {
-        _setTableData()
+        _getTableData()
     }, [])
 
 
@@ -24,7 +24,7 @@ export default function MuseumDetailsTable() {
                 Manage Museum Details
             </h2>
 
-            <AddMuseumModal />
+            <AddMuseumModal getTableData={_getTableData} />
 
             <div className="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">
                 <div className="align-middle rounded-tl-lg rounded-tr-lg inline-block w-full py-4 overflow-hidden bg-white shadow-lg px-12">
@@ -142,7 +142,7 @@ export default function MuseumDetailsTable() {
                                                         />
                                                     </svg>
                                                 </div>
-                                                <EditMuseumModal row={row} />
+                                                <EditMuseumModal row={row} getTableData={_getTableData} />
                                                 <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                                     <svg
                                                         xmlns="http://www.w3.org/2000/svg"

@@ -7,7 +7,7 @@ import { storage } from '../../../services/firebase'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import { addMuseum } from '../../../services/museum';
 
-export default function AddMuseumModal() {
+export default function AddMuseumModal({ getTableData }) {
     const [open, setOpen] = useState(false);
     const [file, setFile] = useState(null)
     const [form, setForm] = useState({});
@@ -54,6 +54,7 @@ export default function AddMuseumModal() {
                         setLoading(false);
                         if (res.success) {
                             toast.success(res.message);
+                            getTableData()
                             _modalClose();
                         } else {
                             toast.error(res.message);
@@ -147,7 +148,7 @@ export default function AddMuseumModal() {
                                                                                     placeholder="Add Museum Title"
                                                                                     name='title'
                                                                                     onChange={(e) => setForm({ ...form, title: e.target.value })}
-                                                                                    vale={form.title}
+                                                                                    value={form.title}
                                                                                 />
                                                                             </div>
 
@@ -175,7 +176,7 @@ export default function AddMuseumModal() {
                                                                                         placeholder="Latitude"
                                                                                         name='lat'
                                                                                         onChange={(e) => setForm({ ...form, lat: e.target.value })}
-                                                                                        vale={form.lat}
+                                                                                        value={form.lat}
                                                                                     />
                                                                                 </div>
                                                                                 <div class="flex flex-col ml-3">
@@ -189,7 +190,7 @@ export default function AddMuseumModal() {
                                                                                         placeholder="Longitude"
                                                                                         name='lng'
                                                                                         onChange={(e) => setForm({ ...form, lng: e.target.value })}
-                                                                                        vale={form.lng}
+                                                                                        value={form.lng}
                                                                                     />
                                                                                 </div>
                                                                             </div>
@@ -204,7 +205,7 @@ export default function AddMuseumModal() {
                                                                                     placeholder="Add Description"
                                                                                     name='description'
                                                                                     onChange={(e) => setForm({ ...form, description: e.target.value })}
-                                                                                    vale={form.description}
+                                                                                    value={form.description}
                                                                                 ></textarea>
                                                                             </div>
 
