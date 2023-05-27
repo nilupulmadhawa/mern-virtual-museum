@@ -1,6 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { getEvent } from '../services/event';
 
 export default function NewEvents() {
+  const {id} =useParams()
+  const [open, setOpen] = useState(false);
+    const [table, setTable] = useState({});
+
+    const _getTableData = () => {
+      getEvent(id).then((res) => {
+          console.log(res)
+          setTable(res.data);
+      });
+  }
+
+  useEffect(() => {
+      _getTableData()
+  }, [])
+
+
   return (
     <section
       className="dark:bg-gray-800 h-screen dark:text-gray-100"
@@ -9,11 +27,10 @@ export default function NewEvents() {
       <div className="container max-w-xl p-6 py-12 mx-auto space-y-24 lg:px-8 lg:max-w-7xl">
         <div>
           <h2 className="text-3xl font-bold tracking-tight text-center sm:text-5xl dark:text-gray-50">
-            Celebrating the Coronation at the British Museum
+            {table?.Event_Title}
           </h2>
           <p className="max-w-3xl mx-auto mt-4 text-xl text-center dark:text-gray-400">
-            Join us to celebrate the Coronation of His Majesty The King and Her
-            Majesty The Queen.
+           {table?.Event_Subtitle}
           </p>
         </div>
         <br />
@@ -53,12 +70,16 @@ export default function NewEvents() {
                   <h4 className="text-lg font-medium leading-6 dark:text-gray-50">
                     Start Date
                   </h4>
-                  <p className="mt-2 dark:text-gray-400">07-05-2023</p>
+                  <p className="mt-2 dark:text-gray-400">{table?.Start_Date}</p>
                 </div>
+                
+              
+              </div>
+              <div className="flex">
                 <div className="flex-shrink-0">
                   <div className="flex items-center justify-center w-12 h-12 rounded-md dark:bg-violet-400 dark:text-gray-900">
                     <svg
-                      xmlns="./images/calender1.png"
+                      xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -75,11 +96,13 @@ export default function NewEvents() {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-medium leading-6 dark:text-gray-50">
+                    {' '}
                     Time
                   </h4>
-                  <p className="mt-2 dark:text-gray-400">3 pm</p>
+                  <p className="mt-2 dark:text-gray-400">
+                  {table?.Time}
+                  </p>
                 </div>
-              
               </div>
               <div className="flex">
                 <div className="flex-shrink-0">
@@ -106,7 +129,7 @@ export default function NewEvents() {
                     Event Category
                   </h4>
                   <p className="mt-2 dark:text-gray-400">
-                    Cultural
+                  {table?.Event_Category}
                   </p>
                 </div>
               </div>
@@ -134,7 +157,7 @@ export default function NewEvents() {
                     Event Description
                   </h4>
                   <p className="mt-2 dark:text-gray-400">
-                    This is a very important event.
+                  {table?.Event_Description}
                   </p>
                 </div>
               </div>
@@ -142,7 +165,7 @@ export default function NewEvents() {
           </div>
           <div aria-hidden="true" className="mt-10 lg:mt-0">
             <img
-              src="./images/mu1.jpg"
+              src={table?.Event_Image}
               alt=""
               className="mx-auto rounded-lg shadow-lg dark:bg-gray-500 "
             />

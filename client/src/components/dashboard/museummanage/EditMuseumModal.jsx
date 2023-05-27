@@ -168,7 +168,7 @@ export default function EditMuseumModal({ row, getTableData }) {
                                                                                     class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                                                                     placeholder="Add Museum Title"
                                                                                     name='title'
-                                                                                    onChange={(e) => setForm({ ...form, title: e.target.value })}
+                                                                                    onChange={(e) => setForm({ ...form,title: e.target.value })}
                                                                                     value={form.title}
                                                                                 />
                                                                             </div>
@@ -242,7 +242,7 @@ export default function EditMuseumModal({ row, getTableData }) {
                                             <button
                                                 type="submit"
                                                 className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-800 sm:ml-3 sm:w-auto"
-                                                ref={cancelButtonRef}
+                                                onClick={() => setOpen(false)}
                                             >
                                                 Update
                                             </button>
@@ -250,6 +250,7 @@ export default function EditMuseumModal({ row, getTableData }) {
                                                 type="button"
                                                 className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                                                 onClick={() => setOpen(false)}
+                                                ref={cancelButtonRef}
                                             >
                                                 Cancel
                                             </button>
