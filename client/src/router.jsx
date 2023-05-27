@@ -30,78 +30,75 @@ import Museum from './components/Museum';
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Home />,
-    },
-    {
-        path: '/about',
-        element: <AboutUs />,
-    },
-    {
-        path: '/shopcategory',
-        element: <ShopCategory />,
-    },
-    {
-        path: '/shopview/:cat',
-        element: <ShopViewMagnet />,
-    },
-    {
-        path: '/shopviewcards',
-        element: <ShopViewCards />,
-    },
-    {
-        path: '/shopviewaccessories',
-        element: <ShopViewAccessories />,
-    },
-    {
-        path: '/singleitemview',
-        element: <SingleItemView />,
-    },
-
-    {
-        path: '/eventDetails',
-        element: <EventDetails />,
-    },
-    {
-        path: '/newEvents/:id',
-        element: <NewEvents />,
-    },
-    {
-        path: '/blogsview',
-        element: <BlogsView />,
-    },
-    {
-        path: '/blogview',
-        element: <BlogView />,
-    },
-    {
-        path: '/articlesview',
-        element: <ArticlesView />,
-    },
-
-    {
-        path: '/museumlist',
-        element: <MuseumList />,
-    },
-    {
-        path: '/login',
-        element: <Login />,
-    },
-    {
-        path: '/museum/:id',
-        element: <Museum />,
-    },
-
-    {
-        path: '/',
-        element: <GuestLayout />,
+        element: <DefaultLayout />,
         children: [
+            {
+                path: '/',
+                element: <Home />,
+            },
+            {
+                path: '/about',
+                element: <AboutUs />,
+            },
+            {
+                path: '/shopcategory',
+                element: <ShopCategory />,
+            },
+            {
+                path: '/shopview/:cat',
+                element: <ShopViewMagnet />,
+            },
+            {
+                path: '/shopviewcards',
+                element: <ShopViewCards />,
+            },
+            {
+                path: '/shopviewaccessories',
+                element: <ShopViewAccessories />,
+            },
+            {
+                path: '/singleitemview',
+                element: <SingleItemView />,
+            },
+
+            {
+                path: '/eventDetails',
+                element: <EventDetails />,
+            },
+            {
+                path: '/newEvents/:id',
+                element: <NewEvents />,
+            },
+            {
+                path: '/blogsview',
+                element: <BlogsView />,
+            },
+            {
+                path: '/blogview',
+                element: <BlogView />,
+            },
+            {
+                path: '/articlesview',
+                element: <ArticlesView />,
+            },
+
+            {
+                path: '/museumlist',
+                element: <MuseumList />,
+            },
+            {
+                path: '/login',
+                element: <Login />,
+            },
+            {
+                path: '/museum/:id',
+                element: <Museum />,
+            },
+
+
             {
                 path: '/signup',
                 element: <Signup />,
-            },
-            {
-                path: '/aa',
-                element: <NotFound />,
             },
         ],
     },
