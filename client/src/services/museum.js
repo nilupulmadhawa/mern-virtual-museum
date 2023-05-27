@@ -12,7 +12,7 @@ export const getAllMuseums = async (query = 'sort[created_at]=-1') => {
     return await apiRequest(() => axiosInstance.get(`/museum?${query}`))
 }
 
-export const getMyMuseums = async (id) => {
+export const getMuseum = async (id) => {
     return await apiRequest(() => axiosInstance.get(`/museum/${id}`))
 }
 
