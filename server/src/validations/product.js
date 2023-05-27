@@ -5,7 +5,7 @@ export const addProductSchema = Joi.object({
   category: Joi.string().required(),
   image: Joi.string(),
   price: Joi.string().required(),
-  is_active: Joi.boolean().required(),
+  is_active: Joi.boolean(),
 });
 
 export const productViewSchema = {

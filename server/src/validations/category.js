@@ -4,7 +4,7 @@ export const addCategorySchema = Joi.object({
   category: Joi.string().required(),
   description: Joi.string().required(),
   image: Joi.string(),
-  is_active: Joi.boolean().required(),
+  is_active: Joi.boolean(),
 });
 
 export const categoryViewSchema = {
