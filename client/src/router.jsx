@@ -86,55 +86,53 @@ const router = createBrowserRouter([
         path: '/login',
         element: <Login />,
     },
-],
-    },
-{
-    path: '/museum/:id',
+    {
+        path: '/museum/:id',
         element: <Museum />,
     },
 
-{
-    path: '/',
+    {
+        path: '/',
         element: <GuestLayout />,
-            children: [
-                {
-                    path: '/signup',
-                    element: <Signup />,
-                },
-                {
-                    path: '/aa',
-                    element: <NotFound />,
-                },
-            ],
+        children: [
+            {
+                path: '/signup',
+                element: <Signup />,
+            },
+            {
+                path: '/aa',
+                element: <NotFound />,
+            },
+        ],
     },
-{
-    path: '/',
+    {
+        path: '/',
         element: <DashboardLayout />,
-            children: [
-                {
-                    path: '/dashboard',
-                    element: <AdminDashboard />,
-                },
-                {
-                    path: '/museummanage',
-                    element: <MuseumDetailsTable />,
-                },
-                {
-                    path: '/blogmanage',
-                    element: <BlogMainPage />,
-                },
-                {
-                    path: '/eventsmanage',
-                    element: <ManageEvent />,
-                },
-                {
-                    path: '/shopmanage',
-                    element: <ShopMainPage />,
-                },
-            ],
+        children: [
+            {
+                path: '/dashboard',
+                element: <AdminDashboard />,
+            },
+            {
+                path: '/museummanage',
+                element: <MuseumDetailsTable />,
+            },
+            {
+                path: '/blogmanage',
+                element: <BlogMainPage />,
+            },
+            {
+                path: '/eventsmanage',
+                element: <ManageEvent />,
+            },
+            {
+                path: '/shopmanage',
+                element: <ShopMainPage />,
+            },
+        ],
     },
-{
-    path: '*',
+    {
+        path: '*',
         element: <NotFound />,
     },
 ]);
