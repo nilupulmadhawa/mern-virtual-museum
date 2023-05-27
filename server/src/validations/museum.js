@@ -1,12 +1,12 @@
 import { Joi } from 'celebrate'
 
 export const addMuseumSchema = Joi.object({
-    museum_name: Joi.string().required(),
     title: Joi.string().required(),
+    description: Joi.string().required(),
     image: Joi.string(),
-    lat: Joi.string(),
-    lng: Joi.string(),
-    is_active: Joi.boolean().required(),
+    lat: Joi.number(),
+    lng: Joi.number(),
+    is_active: Joi.boolean(),
 })
 
 export const museumViewSchema = {

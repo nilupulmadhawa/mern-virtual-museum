@@ -3,10 +3,6 @@ import aggregatePaginate from 'mongoose-aggregate-paginate-v2'
 
 const MuseumSchema = new mongoose.Schema(
     {
-        museum_name: {
-            type: String,
-            required: true
-        },
         title: {
             type: String,
             required: true
