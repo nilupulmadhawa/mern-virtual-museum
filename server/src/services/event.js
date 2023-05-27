@@ -1,4 +1,4 @@
-import { insertEvent, findOneAndUpdateEvent, findOneAndRemoveEvent, getOneEvent, getAllEvents } from '../repository/museum'
+import { insertEvent, findOneAndUpdateEvent, findOneAndRemoveEvent, getOneEvent, getAllEvents } from '../repository/event'
 
 export const createEvent = async (data) => {
     return await insertEvent(data)

@@ -3,34 +3,34 @@ import aggregatePaginate from 'mongoose-aggregate-paginate-v2'
 
 const EventSchema = new mongoose.Schema(
     {
-        museum_name: {
+        Event_Title: {
             type: String,
             required: true
         },
-        title: {
+        Event_Image: {
             type: String,
             required: true
         },
-        description: {
+        Event_Subtitle: {
             type: String,
             required: true
         },
-        image: {
+        Start_Date: {
             type: String,
-            required: false
-        },
-        lat: {
-            type: Number,
             required: true
         },
-        lng: {
-            type: Number,
+        Time: {
+            type: String,
             required: true
         },
-        is_active: {
-            type: Boolean,
+        Event_Category: {
+            type: String,
+            required: true
+        },
+        Event_Description: {
+            type: String,
             required: true,
-            default: true
+    
         }
     },
     {
@@ -38,11 +38,11 @@ const EventSchema = new mongoose.Schema(
     }
 )
 
-MuseumSchema.plugin(aggregatePaginate)
+EventSchema.plugin(aggregatePaginate)
 
-MuseumSchema.index({ createdAt: 1 })
+EventSchema.index({ createdAt: 1 })
 
-const Museum = mongoose.model('Museum', MuseumSchema)
-Museum.syncIndexes()
+const Event = mongoose.model('Event', EventSchema)
+Event.syncIndexes()
 
-export default Museum
+export default Event
