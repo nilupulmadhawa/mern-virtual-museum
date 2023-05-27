@@ -91,16 +91,14 @@ const router = createBrowserRouter([
                 element: <Login />,
             },
             {
-                path: '/museum/:id',
-                element: <Museum />,
-            },
-
-
-            {
                 path: '/signup',
                 element: <Signup />,
             },
         ],
+    },
+    {
+        path: '/museum/:id',
+        element: <Museum />,
     },
     {
         path: '/',
