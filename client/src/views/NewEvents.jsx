@@ -48,12 +48,38 @@ export default function NewEvents() {
                     </svg>
                   </div>
                 </div>
+              
                 <div className="ml-4">
                   <h4 className="text-lg font-medium leading-6 dark:text-gray-50">
-                    Date & Time
+                    Start Date
                   </h4>
-                  <p className="mt-2 dark:text-gray-400">15-05-2023 at 3pm.</p>
+                  <p className="mt-2 dark:text-gray-400">07-05-2023</p>
                 </div>
+                <div className="flex-shrink-0">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-md dark:bg-violet-400 dark:text-gray-900">
+                    <svg
+                      xmlns="./images/calender1.png"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      className="w-7 h-7"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <div className="ml-4">
+                  <h4 className="text-lg font-medium leading-6 dark:text-gray-50">
+                    Time
+                  </h4>
+                  <p className="mt-2 dark:text-gray-400">3 pm</p>
+                </div>
+              
               </div>
               <div className="flex">
                 <div className="flex-shrink-0">
@@ -77,10 +103,10 @@ export default function NewEvents() {
                 <div className="ml-4">
                   <h4 className="text-lg font-medium leading-6 dark:text-gray-50">
                     {' '}
-                    Location
+                    Event Category
                   </h4>
                   <p className="mt-2 dark:text-gray-400">
-                    Great Court and front lawn.
+                    Cultural
                   </p>
                 </div>
               </div>
@@ -105,10 +131,10 @@ export default function NewEvents() {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-medium leading-6 dark:text-gray-50">
-                    Age limit
+                    Event Description
                   </h4>
                   <p className="mt-2 dark:text-gray-400">
-                    Suitable for all ages.
+                    This is a very important event.
                   </p>
                 </div>
               </div>

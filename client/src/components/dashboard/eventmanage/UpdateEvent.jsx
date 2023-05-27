@@ -71,11 +71,10 @@ export default function UpdateEvent() {
                                   </div>
                                   <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
                                     <h2 class="leading-relaxed">
-                                      Update Event Exhibit
+                                      Update Event
                                     </h2>
                                     <p class="text-sm text-gray-500 font-normal leading-relaxed">
-                                      Update Event Exhibit for the Virtual
-                                      Event.
+                                      Update existing event for Virtual Museum.
                                     </p>
                                   </div>
                                 </div>
@@ -87,7 +86,7 @@ export default function UpdateEvent() {
                                       </label>
                                       <input
                                         type="text"
-                                        value={'Natural History'}
+                                        
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                         placeholder="Add Event
              Title"
@@ -123,7 +122,7 @@ export default function UpdateEvent() {
                                         <div class="relative focus-within:text-gray-600 text-gray-400">
                                           <input
                                             type="date"
-                                            value={'07/05/2021'}
+                                     
                                             class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                             placeholder="07/05/2023"
                                           />
@@ -147,30 +146,23 @@ export default function UpdateEvent() {
                                       </div>
                                       <div class="flex flex-col">
                                         <label class="leading-loose">
-                                          End Date
+                                         Time
                                         </label>
                                         <div class="relative focus-within:text-gray-600 text-gray-400">
                                           <input
-                                            type="date"
-                                            value={'10/05/2021'}
-                                            class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                            placeholder="10/05/2023"
+                                            type="String"
+                                            class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                            placeholder="Add Time"
                                           />
                                           <div class="absolute left-3 top-2">
-                                            <svg
-                                              class="w-6 h-6"
-                                              fill="none"
-                                              stroke="currentColor"
-                                              viewBox="0 0 24 24"
-                                              xmlns="http://www.w3.org/2000/svg"
-                                            >
+                                            
                                               <path
                                                 stroke-linecap="round"
                                                 stroke-linejoin="round"
                                                 stroke-width="2"
                                                 d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                               ></path>
-                                            </svg>
+                                            
                                           </div>
                                         </div>
                                       </div>
@@ -181,7 +173,7 @@ export default function UpdateEvent() {
                                       </label>
                                       <input
                                         type="text"
-                                        value={'Natural History'}
+                                       
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                         placeholder="Add Category"
                                       />
@@ -192,9 +184,7 @@ export default function UpdateEvent() {
                                       </label>
                                       <input
                                         type="text"
-                                        value={
-                                          'This exhibit features a collection of natural history specimens, including fossils, taxidermy animals, and plant specimens.'
-                                        }
+                                        
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                         placeholder="Add Description"
                                       />

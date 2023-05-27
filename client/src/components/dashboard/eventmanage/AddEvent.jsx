@@ -4,7 +4,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 export default function AddEvent() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const cancelButtonRef = useRef(null);
   return (
@@ -59,11 +59,10 @@ export default function AddEvent() {
                                   </div>
                                   <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
                                     <h2 class="leading-relaxed">
-                                      Create Event Exhibit
+                                      Create new Event 
                                     </h2>
                                     <p class="text-sm text-gray-500 font-normal leading-relaxed">
-                                      Add new Event Exhibit for the Virtual
-                                      Event.
+                                     Create new event for the Virtual Museum.
                                     </p>
                                   </div>
                                 </div>
@@ -86,7 +85,7 @@ export default function AddEvent() {
                                         Event Image
                                       </label>
                                       <input
-                                        type="text"
+                                        type="file"
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                         placeholder="Add Category"
                                       />
@@ -98,7 +97,7 @@ export default function AddEvent() {
                                       <input
                                         type="text"
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                        placeholder="Update Event Subtitle"
+                                        placeholder="Add Event Subtitle"
                                       />
                                     </div>
 
@@ -109,7 +108,7 @@ export default function AddEvent() {
                                         </label>
                                         <div class="relative focus-within:text-gray-600 text-gray-400">
                                           <input
-                                            type="text"
+                                            type="date"
                                             class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                             placeholder="07/05/2023"
                                           />
@@ -133,29 +132,23 @@ export default function AddEvent() {
                                       </div>
                                       <div class="flex flex-col">
                                         <label class="leading-loose">
-                                          End Date
+                                         Time
                                         </label>
                                         <div class="relative focus-within:text-gray-600 text-gray-400">
                                           <input
-                                            type="text"
-                                            class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                                            placeholder="10/05/2023"
+                                            type="String"
+                                            class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                            placeholder="Add Time"
                                           />
                                           <div class="absolute left-3 top-2">
-                                            <svg
-                                              class="w-6 h-6"
-                                              fill="none"
-                                              stroke="currentColor"
-                                              viewBox="0 0 24 24"
-                                              xmlns="http://www.w3.org/2000/svg"
-                                            >
+                                            
                                               <path
                                                 stroke-linecap="round"
                                                 stroke-linejoin="round"
                                                 stroke-width="2"
                                                 d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                               ></path>
-                                            </svg>
+                                            
                                           </div>
                                         </div>
                                       </div>
