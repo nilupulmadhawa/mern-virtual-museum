@@ -5,7 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 export default function EditProduct(props) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const cancelButtonRef = useRef(null);
 
